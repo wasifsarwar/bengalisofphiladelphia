@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Artwork, InstagramIcon, Updates } from "../components/Layout";
+import { CommunityArchive } from "../components/CommunityArchive";
+import { Artwork, Updates } from "../components/Layout";
 import { categories, eventIdeas, imageUrl, links } from "../data/content";
 import type { Category } from "../data/content";
 export function Home() {
@@ -19,7 +20,7 @@ export function Home() {
       </a>
       <section className="home-hero">
         <div className="container">
-          <p className="eyebrow">Bengalis of Philadelphia</p>
+          <p className="eyebrow">Bengalis of Philadelphia / Est. 2026</p>
           <h1>
             Culture.
             <br />
@@ -27,9 +28,9 @@ export function Home() {
           </h1>
           <p className="intro">
             We’re Bangladeshis in Philly getting together for cha, adda, and
-            time around the city. Walks and hikes, museum days, pick-up games,
-            cultural events, and bookstore crawls. Honorary Bengalis are
-            welcome, too.
+            time around the city. We’re planning walks and hikes, museum days,
+            pick-up games, cultural events, and bookstore crawls. Honorary
+            Bengalis are welcome, too.
           </p>
           <a className="button" href="#/get-involved">
             <span className="star" aria-hidden="true">
@@ -39,42 +40,12 @@ export function Home() {
           </a>
         </div>
       </section>
-      <section className="archive section">
-        <div className="container">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">Our community</p>
-              <h2>IRL Connections</h2>
-            </div>
-            <a className="button button-rust" href={links.heylo}>
-              Join on Heylo <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-          <div className="archive-content">
-            <div>
-              <h3>What we’ve been up to</h3>
-              <p>
-                Photos, adda, and days out around Philly. Follow along on
-                Instagram for updates from the community.
-              </p>
-              <a className="text-link" href={links.instagram}>
-                <InstagramIcon /> @bengalisofphiladelphia{" "}
-                <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-            <div className="photo-empty">
-              <span aria-hidden="true">✷</span>
-              <p>More moments to come.</p>
-              <span>Community photos will be shared here.</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CommunityArchive />
       <section className="events section" aria-labelledby="events-heading">
         <div className="container">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">Make plans with BOP</p>
+              <p className="eyebrow">Mark your calendars</p>
               <h2 id="events-heading">Upcoming events</h2>
             </div>
             <a className="button button-outline" href={links.heylo}>
@@ -98,6 +69,9 @@ export function Home() {
           </div>
           <p className="sr-only" aria-live="polite">
             {ideas.length} event {ideas.length === 1 ? "idea" : "ideas"} shown
+          </p>
+          <p className="event-group-label">
+            {category === "All events" ? "The next get-together" : category}
           </p>
           <div className="event-grid">
             {ideas.map((event, index) => (
@@ -126,7 +100,7 @@ export function Home() {
             ))}
           </div>
           <div className="section-end">
-            <a className="text-link" href={links.heylo}>
+            <a className="button button-rust" href={links.heylo}>
               See the latest plans on Heylo <span aria-hidden="true">↗</span>
             </a>
           </div>

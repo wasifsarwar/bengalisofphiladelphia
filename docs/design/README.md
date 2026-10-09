@@ -35,3 +35,18 @@ original assets for implementation rather than upscaling these screenshots.
 
 Captures were taken sequentially while collaborators were editing, not as an atomic
 Figma version snapshot. No separate mobile story/Get involved frames were identified.
+
+## User-supplied Home detail references
+
+The latest Home references are the four full-quality screenshots supplied by the
+user: [hero](images/home-hero.png), [archive](images/home-archive.png),
+[events](images/home-events.png), and [updates/footer](images/home-updates.png).
+They take precedence over the older home-desktop overview for Home styling.
+They were supplied directly, not newly downloaded from Figma. Their individual
+capture times are unknown; receipt metadata and hashes are recorded in the manifest.
+
+The files embed an HP Z30i monitor profile. Color analysis must convert that profile
+to sRGB first: Home green #2F6755, red #C8122E, cream #FFF9EE, gold #E3BC53.
+Do not copy collaborator markers, invisible CTA labels, or internal archive notes.
+The existing Heylo links remain authoritative. The email signup requires a real
+service before enabling it; the current demo uses a working Heylo updates CTA.

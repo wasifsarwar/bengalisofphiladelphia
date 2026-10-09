@@ -31,7 +31,13 @@ export function Header({ page }: { page: Page }) {
     <>
       <div className="community-strip">
         <a href={links.heylo}>
-          Register for meetups on Heylo <span aria-hidden="true">↗</span>
+          <span className="strip-copy">★ Register for meetups via Heylo ★</span>
+          {page === "events" && (
+            <span className="strip-repeat" aria-hidden="true">
+              {" "}
+              Register for meetups via Heylo ★ Register for meetups via Heylo ★
+            </span>
+          )}
         </a>
       </div>
       <header

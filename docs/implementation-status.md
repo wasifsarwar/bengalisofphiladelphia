@@ -37,8 +37,9 @@ specific slot after the design update is settled and its native asset is availab
 
 Community photos have not been supplied. Compact, clearly worded empty states
 replace editorial upload instructions; they do not pretend to be event photos.
-Story's two photo slots currently use text cards. The large empty archive grid is
-condensed until there is actual content. These are intentional demo deviations.
+Story's two photo slots currently use text cards. The Home archive grid now follows the user-supplied detail screenshots, with
+public-facing empty-state text instead of editorial instructions. These are
+intentional demo deviations.
 Unconfirmed October/sample dates and venue/pricing claims are not published.
 Register on Heylo buttons lead to the community, not a fabricated event page.
 Red body text was lightened for contrast. Exact Figma font metrics remain to verify.
@@ -57,3 +58,15 @@ Red body text was lightened for contrast. Exact Figma font metrics remain to ver
 
 Browser instrumentation emitted MutationObserver errors; the application does not
 use MutationObserver. The tested interactions rendered and completed successfully.
+
+
+## Home reference refinement
+
+Home styling now follows the four user-supplied section screenshots, including the
+color-profile-corrected green/red palette, condensed Bebas Neue headings, archive
+card/mosaic layout, hero measure, featured event treatment, and updates/footer bands.
+The event heading stays “Upcoming events” because no October schedule is confirmed;
+calendar actions retain the user-requested Heylo labels. Existing category filters
+remain functional. Updates still use Heylo rather than an unconnected email form.
+The original artwork export previews remain low resolution; the screenshots are
+stored as references, not used as page backgrounds or cropped implementation assets.

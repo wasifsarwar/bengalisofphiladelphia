@@ -10,6 +10,8 @@ import { Story } from "./pages/Story";
 import { Involved } from "./pages/Involved";
 import type { Page } from "./data/content";
 import "./style.css";
+import "@fontsource/bebas-neue/latin-400.css";
+import "./home.css";
 
 function currentPage(): Page {
   const route = window.location.hash.replace(/^#\/?/, "").replace(/\/$/, "");

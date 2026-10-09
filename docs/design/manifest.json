@@ -42,5 +42,44 @@
       "height": 1305,
       "sha256": "3ce5458c0e0a2d0a0fe2c68ee13f084717845e075fba00cc389d3fdb815768c9"
     }
-  ]
+  ],
+  "home_detail_references": [
+    {
+      "file": "images/home-hero.png",
+      "node_id": "7:46",
+      "source": "User-supplied high-quality Figma screenshot",
+      "received_at": "2026-10-09T01:50:08.324247+00:00",
+      "width": 1235,
+      "height": 572,
+      "sha256": "9535ae84b6208a40ae5fea037161da1bf98ccb206c8a973dff057365c78be537"
+    },
+    {
+      "file": "images/home-archive.png",
+      "node_id": "7:46",
+      "source": "User-supplied high-quality Figma screenshot",
+      "received_at": "2026-10-09T01:50:08.371497+00:00",
+      "width": 1057,
+      "height": 801,
+      "sha256": "c469f2cbea88038dfe3d913cccc13483532805879982697d8c771687c686e410"
+    },
+    {
+      "file": "images/home-events.png",
+      "node_id": "7:46",
+      "source": "User-supplied high-quality Figma screenshot",
+      "received_at": "2026-10-09T01:50:08.438248+00:00",
+      "width": 1062,
+      "height": 1153,
+      "sha256": "cb56d26c94514ed36abf161588d4efdfda731722688240ee48171f966b224872"
+    },
+    {
+      "file": "images/home-updates.png",
+      "node_id": "7:46",
+      "source": "User-supplied high-quality Figma screenshot",
+      "received_at": "2026-10-09T01:50:08.467175+00:00",
+      "width": 1327,
+      "height": 405,
+      "sha256": "f3830f7aedc6ee64e70f39082ff01db15b2be5f30db2c5a9fc3b1be6896401df"
+    }
+  ],
+  "home_reference_priority": "Use home_detail_references for current Home styling; home-desktop.png remains the older full-page overview. Screenshots include collaborator markers and editorial notes that are not UI requirements."
 }
