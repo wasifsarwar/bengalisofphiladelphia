@@ -1,0 +1,20 @@
+# Project-only MCP servers. Reopen Codex with bop-site as the project directory.
+[mcp_servers.serena]
+command = "/Users/wasifsiddique/.local/bin/uvx"
+args = ["--from", "git+https://github.com/oraios/serena@ec98be89545270e9d689149519820ba24270f55a", "serena", "start-mcp-server", "--context", "codex", "--project", "/Users/wasifsiddique/Desktop/BOP/bop-site", "--enable-web-dashboard", "false", "--open-web-dashboard", "false"]
+cwd = "/Users/wasifsiddique/Desktop/BOP/bop-site"
+startup_timeout_sec = 120
+
+[mcp_servers.context7]
+command = "/opt/homebrew/bin/node"
+args = ["/Users/wasifsiddique/Desktop/BOP/bop-site/.tools/mcp/node_modules/@upstash/context7-mcp/dist/index.js"]
+cwd = "/Users/wasifsiddique/Desktop/BOP/bop-site"
+startup_timeout_sec = 30
+
+[mcp_servers.memory]
+command = "/opt/homebrew/bin/node"
+args = ["/Users/wasifsiddique/Desktop/BOP/bop-site/.tools/mcp/node_modules/@modelcontextprotocol/server-memory/dist/index.js"]
+cwd = "/Users/wasifsiddique/Desktop/BOP/bop-site"
+startup_timeout_sec = 30
+[mcp_servers.memory.env]
+MEMORY_FILE_PATH = "/Users/wasifsiddique/Desktop/BOP/bop-site/.local/memory.jsonl"
