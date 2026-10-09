@@ -1,0 +1,46 @@
+{
+  "figma_file_key": "Q33Aeo2EJfi1eTvloKRFpr",
+  "capture_method": "Figma browser screenshots; cropped frame overviews, not native full-resolution exports",
+  "images": [
+    {
+      "file": "images/home-desktop.png",
+      "node_id": "7:46",
+      "frame_name_at_capture": "BOP / Upcoming events / Desktop v1",
+      "captured_at": "2026-10-09T01:21:07.769611+00:00",
+      "figma_url": "https://www.figma.com/design/Q33Aeo2EJfi1eTvloKRFpr/BOP-Website-Spec?node-id=7-46",
+      "width": 474,
+      "height": 1260,
+      "sha256": "34ae3f27e063bec42cc80970c097c67d25c09eeaf452bf3517f16259ce2b18fe"
+    },
+    {
+      "file": "images/our-story-desktop.png",
+      "node_id": "114:211",
+      "frame_name_at_capture": "BOP FINAL",
+      "captured_at": "2026-10-09T01:21:30.205310+00:00",
+      "figma_url": "https://www.figma.com/design/Q33Aeo2EJfi1eTvloKRFpr/BOP-Website-Spec?node-id=114-211",
+      "width": 635,
+      "height": 1167,
+      "sha256": "4c90c873d10311998cb1b364013a30be673d3865101cb5e478155c9f5f7959af"
+    },
+    {
+      "file": "images/get-involved-desktop.png",
+      "node_id": "126:271",
+      "frame_name_at_capture": "BOP / Get involved / Desktop v1",
+      "captured_at": "2026-10-09T01:21:50.407451+00:00",
+      "figma_url": "https://www.figma.com/design/Q33Aeo2EJfi1eTvloKRFpr/BOP-Website-Spec?node-id=126-271",
+      "width": 634,
+      "height": 1146,
+      "sha256": "87141bedb863edcc883154832a7b11198e78f1febd58b1d9ac0a8f73a4d51c16"
+    },
+    {
+      "file": "images/home-mobile.png",
+      "node_id": "7:47",
+      "frame_name_at_capture": "BOP / Upcoming events / Mobile v1",
+      "captured_at": "2026-10-09T01:22:29.871344+00:00",
+      "figma_url": "https://www.figma.com/design/Q33Aeo2EJfi1eTvloKRFpr/BOP-Website-Spec?node-id=7-47",
+      "width": 103,
+      "height": 1305,
+      "sha256": "3ce5458c0e0a2d0a0fe2c68ee13f084717845e075fba00cc389d3fdb815768c9"
+    }
+  ]
+}

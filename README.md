@@ -1,7 +1,8 @@
 # Bengalis of Philadelphia website
 
 Local repository for implementing BOP's community website from the collaborative
-Figma design. Created October 8, 2026. Application implementation has not started.
+Figma design. Created October 8, 2026. A React/TypeScript/Vite holding page is live; the full
+Figma implementation is still to come.
 
 ## Scope
 
@@ -14,6 +15,11 @@ Follow [AGENTS.md](AGENTS.md) for the efficient working process and BOP copy rul
 See [design reference](docs/design-reference.md) for verified design observations,
 frame links, and service destinations.
 
+Current visual references are stored in [docs/design/images](docs/design/images).
+When the user says the design is updated, replace those captures from Figma and
+update the [capture manifest](docs/design/manifest.json) before further UI work.
+See the [capture guide](docs/design/README.md) for the refresh procedure.
+
 ## Technology stack
 
 Required by the user: **TypeScript and Vite**. Use React for components, strict
@@ -24,12 +30,33 @@ default appearance. Verify compatible package versions when scaffolding.
 
 ## Repository status
 
-Git branch: `main`. No deployment or application framework has been configured;
-the agent tooling dependencies are installed separately. Earlier screenshot exports live in `../exports/`;
-they predate the latest restyling and must not be used as the current design source.
+Public repository: https://github.com/wasifsarwar/bengalisofphiladelphia
+Demo: https://wasifsarwar.github.io/bengalisofphiladelphia/
 
-Next: confirm the latest frames and implement the responsive site. Add actual
-development, build, and validation commands here when the application is scaffolded.
+Git branch: `main`. GitHub Actions builds and deploys `dist/` to Pages on every
+push to `main`. The workflow can also be run manually in the Actions tab.
+No deployment token or third-party hosting account is needed.
+Vite's base path is `/bengalisofphiladelphia/`, as required for this project URL.
+Source maps are disabled. The preview requests search engines not to index it.
+
+## Development and validation
+
+Use Node 24 LTS and run:
+
+```sh
+npm ci
+npm run dev
+npm run build
+npm run preview
+```
+
+The build runs strict TypeScript checking before Vite. Publish by committing
+and pushing to `main`; check the Pages workflow completes before sharing an update.
+Agent tooling dependencies remain separate under `.tools/mcp/`.
+
+Next: confirm the latest Figma frames and implement the responsive site.
+Future client-side routes must account for GitHub Pages lacking an SPA rewrite
+(use hash routing or generate real page files).
 
 ## Agent tooling
 
@@ -39,8 +66,7 @@ only). No global MCP settings or model preferences were changed.
 
 - Serena is pinned to commit `ec98be89545270e9d689149519820ba24270f55a`, launched
   through uvx with the Codex context and this project explicitly selected. Its
-  TypeScript language configuration prepares for frontend code; no app stack is
-  installed by this setup. Language-server indexing awaits actual source files.
+  TypeScript language configuration supports the frontend source files.
 - Context7 `4.2.0` and Memory `2026.8.31` are installed under `.tools/mcp` with a
   lockfile. Restore with `npm ci --prefix .tools/mcp`. Context7 uses its keyless
   mode; account limits may require authentication later.

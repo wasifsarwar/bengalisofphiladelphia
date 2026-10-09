@@ -4,6 +4,12 @@ Observed directly in the collaborative Figma board on October 8, 2026. These are
 snapshot observations, not an assertion of who authored each edit or final approval.
 The board is actively changing; recheck relevant frames before implementation.
 
+The latest captured appearance is in [design/images](design/images), with timestamps
+in [design/manifest.json](design/manifest.json). Prefer those images over the earlier
+observations below where they differ. At capture time, BOP FINAL's hero had changed
+to IRL Connections, with blue/gold details and gold media placeholders. Follow the
+[refresh rule](design/README.md) whenever the user reports an update.
+
 ## Frames
 
 - [Home / desktop](https://www.figma.com/design/Q33Aeo2EJfi1eTvloKRFpr/BOP-Website-Spec?node-id=7-46)

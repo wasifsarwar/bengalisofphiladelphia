@@ -6,11 +6,28 @@ correctness, user intent, and necessary validation.
 
 ## Project essentials
 
+### Visual design reference and refresh trigger
+
+- Use `docs/design/images/` as the checked-in visual implementation reference.
+  Read `docs/design/README.md` and `docs/design/manifest.json` for frame mappings,
+  capture timestamps, and image-quality limitations. Older `../exports/` images
+  are superseded; do not implement from them.
+- When the user says the design is updated (or equivalent), refresh the Figma file,
+  download/export or recapture the tracked frames, and replace the images under
+  the SAME filenames before implementing further UI changes. Inspect the new
+  images, update timestamps/hashes/frame names in the manifest, and summarize the
+  material differences. The user's message authorizes this refresh; do not ask
+  again. Do not schedule background monitoring unless explicitly requested.
+- Prefer native full-resolution Figma exports when available. If unavailable,
+  capture browser screenshots and label their limitations. Never silently keep
+  old images or mark a failed refresh as current. Add new frame references when
+  the design adds pages; preserve prior versions through Git, not duplicate folders.
+
 This repository is for the Bengalis of Philadelphia website. See README.md for
 scope and docs/design-reference.md for the current Figma reference.
 The required stack is TypeScript (strict mode) and Vite, with React for UI and
 plain CSS with shared design tokens for the Figma styling. Application dependencies
-have not been installed yet. Add libraries only for a concrete feature or validation
+are installed at the repository root. Add libraries only for a concrete feature or validation
 need; avoid a large UI kit that overrides the approved design. Do not replace Vite
 with another framework without user direction. Do not inherit transit, map, or
 deployment assumptions from the source repository.
