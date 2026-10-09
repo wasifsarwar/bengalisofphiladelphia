@@ -23,7 +23,6 @@ are actual Figma artwork exports, not redraws, but are visibly soft when enlarge
 | public/images/cha.png | 10:144 | 189 x 94 |
 | public/images/walk.png | 10:157 | 189 x 94 |
 | public/images/games.png | 10:165 | 189 x 94 |
-| public/images/social-host.png | 141:472 | 142 x 189 |
 
 Replace these with full-resolution originals under the same names when available.
 The logo is the original user-supplied JPEG, 1290 x 1281. Font licenses are in
@@ -70,3 +69,11 @@ calendar actions retain the user-requested Heylo labels. Existing category filte
 remain functional. Updates still use Heylo rather than an unconnected email form.
 The original artwork export previews remain low resolution; the screenshots are
 stored as references, not used as page backgrounds or cropped implementation assets.
+
+## Get involved reference refinement
+
+Updated the full-width flyer hero, teal panels, checker borders, Heylo feature,
+participation cards, and contact section from the supplied screenshots. The host
+flyer is now the supplied 852 x 1069 original. Rust headings are lightened for
+readability; links retain visible underlines and readable colors. The community
+photo slot is an honest empty state until a photo is supplied.

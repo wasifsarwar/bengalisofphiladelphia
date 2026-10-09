@@ -25,12 +25,11 @@
     {
       "file": "images/get-involved-desktop.png",
       "node_id": "126:271",
-      "frame_name_at_capture": "BOP / Get involved / Desktop v1",
-      "captured_at": "2026-10-09T01:21:50.407451+00:00",
-      "figma_url": "https://www.figma.com/design/Q33Aeo2EJfi1eTvloKRFpr/BOP-Website-Spec?node-id=126-271",
-      "width": 634,
-      "height": 1146,
-      "sha256": "87141bedb863edcc883154832a7b11198e78f1febd58b1d9ac0a8f73a4d51c16"
+      "source": "User-supplied Figma screenshot",
+      "received_at": "2026-10-09T02:13:54.741127+00:00",
+      "width": 777,
+      "height": 1366,
+      "sha256": "7fb57e283aa475eb3b3356bbeb89459bec0fd54176154a66fe02ef02777ccf2b"
     },
     {
       "file": "images/home-mobile.png",
@@ -81,5 +80,51 @@
       "sha256": "f3830f7aedc6ee64e70f39082ff01db15b2be5f30db2c5a9fc3b1be6896401df"
     }
   ],
-  "home_reference_priority": "Use home_detail_references for current Home styling; home-desktop.png remains the older full-page overview. Screenshots include collaborator markers and editorial notes that are not UI requirements."
+  "home_reference_priority": "Use home_detail_references for current Home styling; home-desktop.png remains the older full-page overview. Screenshots include collaborator markers and editorial notes that are not UI requirements.",
+  "involved_detail_references": [
+    {
+      "file": "images/get-involved-hero.png",
+      "node_id": "126:271",
+      "source": "User-supplied Figma screenshot",
+      "received_at": "2026-10-09T02:13:54.738133+00:00",
+      "width": 1705,
+      "height": 992,
+      "sha256": "b2872c190bd97e08ba21e59e3e92c2c3f67037f7c364a9d1363d6f7faea261a2"
+    },
+    {
+      "file": "images/get-involved-heylo.png",
+      "node_id": "126:271",
+      "source": "User-supplied Figma screenshot",
+      "received_at": "2026-10-09T02:13:54.739130+00:00",
+      "width": 1751,
+      "height": 717,
+      "sha256": "9905d35c879955c35f563c675cd85cfc865249f938b82ec77cd1522c81dd1952"
+    },
+    {
+      "file": "images/get-involved-participation.png",
+      "node_id": "126:271",
+      "source": "User-supplied Figma screenshot",
+      "received_at": "2026-10-09T02:13:54.739772+00:00",
+      "width": 1750,
+      "height": 988,
+      "sha256": "58ac5438dea9f0dbe6624c588d3b4ad3054bb21c05dfcf40e5ea283dedbd9667"
+    },
+    {
+      "file": "images/get-involved-contact.png",
+      "node_id": "126:271",
+      "source": "User-supplied Figma screenshot",
+      "received_at": "2026-10-09T02:13:54.740358+00:00",
+      "width": 1752,
+      "height": 490,
+      "sha256": "fb91bca9c253d6500d8d5f034cc54ea20d12c9e5fef309c33f0f3e4db3a7a3fa"
+    }
+  ],
+  "involved_reference_priority": "User-supplied Get involved section screenshots and updated overview take precedence over earlier captures.",
+  "social_host_asset": {
+    "file": "../../public/images/social-host.png",
+    "source": "User-supplied standalone flyer",
+    "width": 852,
+    "height": 1069,
+    "sha256": "7d4e3ea473c0fc3b0f2cd23fd4fb599c1249cb6064c5210a3764ee1f91db702a"
+  }
 }

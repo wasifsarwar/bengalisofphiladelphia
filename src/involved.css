@@ -1,0 +1,257 @@
+/* Get involved follows the supplied October design references. */
+.page-get-involved {
+  --ink: #163a38;
+  --deep: #0e1d1d;
+  --rust: #9e382c;
+  --coral: #cf6858;
+  background: var(--ink);
+}
+.page-get-involved .community-strip {
+  border-top: 20px solid transparent;
+  border-image: repeating-linear-gradient(
+      90deg,
+      var(--rust) 0 20px,
+      var(--deep) 20px 40px
+    )
+    20;
+  font-size: 12px;
+}
+.page-get-involved .site-header {
+  border-color: var(--rust);
+}
+.page-get-involved .header-inner {
+  min-height: 108px;
+}
+.page-get-involved .involved-hero-grid {
+  width: 100%;
+  max-width: none;
+}
+.page-get-involved .host-poster {
+  align-self: stretch;
+}
+.page-get-involved .host-poster img {
+  height: 100%;
+  object-fit: cover;
+}
+.page-get-involved .involved-intro {
+  padding: 64px clamp(32px, 5vw, 90px);
+}
+.page-get-involved .involved-intro h1 {
+  font-size: clamp(42px, 5.2vw, 80px);
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+  text-wrap: initial;
+}
+.page-get-involved .involved-intro .intro {
+  max-width: 850px;
+  color: var(--cream);
+  font-size: 17px;
+  margin-top: 30px;
+}
+.page-get-involved .eyebrow {
+  letter-spacing: 0;
+  font-size: 12px;
+}
+.page-get-involved .build-together {
+  color: var(--gold);
+  margin-top: 24px;
+}
+.page-get-involved .checker {
+  height: 20px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--gold) 0 20px,
+    var(--deep) 20px 40px
+  );
+}
+.page-get-involved .checker-rust {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--rust) 0 20px,
+    var(--deep) 20px 40px
+  );
+}
+.page-get-involved .involved-content {
+  padding-block: 52px 64px;
+}
+.page-get-involved .section-heading {
+  margin-bottom: 34px;
+}
+.page-get-involved .section-heading h2 {
+  font-size: clamp(32px, 3.6vw, 52px);
+}
+.page-get-involved .story-feature {
+  border: 1px solid var(--rust);
+}
+.page-get-involved .story-feature .artwork {
+  align-self: stretch;
+  height: 100%;
+  object-fit: contain;
+  aspect-ratio: 1.55;
+  background: var(--gold);
+}
+.page-get-involved .story-feature .card-body {
+  padding: 34px;
+}
+.page-get-involved .story-feature h3 {
+  font-size: clamp(30px, 3.2vw, 46px);
+}
+.page-get-involved .card-body p {
+  font-size: 17px;
+  color: #f2e3b5;
+}
+.page-get-involved .story-feature .card-body > p:not(.eyebrow) {
+  color: var(--cream);
+}
+.page-get-involved .card-body .eyebrow {
+  font-size: 12px;
+  color: var(--gold);
+}
+.page-get-involved .dot-divider {
+  height: 12px;
+  margin: 32px 0 36px;
+  background-size: auto;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--gold) 0 12px,
+    transparent 12px 24px
+  );
+}
+.page-get-involved .subheading {
+  font-size: clamp(27px, 2.6vw, 36px);
+  margin-bottom: 34px;
+}
+.page-get-involved .involvement-card {
+  border: 2px solid var(--rust);
+}
+.page-get-involved .involvement-card .artwork {
+  aspect-ratio: 2;
+  object-fit: contain;
+}
+.page-get-involved .involvement-card h3 {
+  font-size: 26px;
+}
+.page-get-involved .involvement-card .card-body {
+  padding: 26px;
+}
+.page-get-involved .involvement-card .text-link {
+  color: var(--muted);
+}
+.page-get-involved .involvement-card .text-link:hover {
+  color: var(--gold);
+}
+.page-get-involved .belonging-card {
+  border-color: var(--gold);
+}
+.page-get-involved .belonging-message {
+  aspect-ratio: 1.4;
+  background: #301c0c;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  text-align: center;
+}
+.page-get-involved .belonging-message p {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gold);
+}
+.page-get-involved .contact {
+  padding-block: 68px;
+}
+.page-get-involved .contact .two-columns {
+  gap: 9%;
+}
+.page-get-involved .contact h2 {
+  font-size: clamp(30px, 3vw, 42px);
+}
+.page-get-involved .contact p:not(.eyebrow) {
+  color: var(--cream);
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.page-get-involved .contact .text-link {
+  font-size: 16px;
+  color: var(--cream);
+}
+.page-get-involved .site-footer {
+  background: var(--deep);
+}
+@media (max-width: 1000px) {
+  .page-get-involved .involved-intro {
+    padding: 36px;
+  }
+  .page-get-involved .involved-intro h1 {
+    font-size: 45px;
+  }
+  .page-get-involved .involved-intro .intro {
+    font-size: 16px;
+  }
+  .page-get-involved .involvement-card .card-body {
+    padding: 22px;
+  }
+}
+@media (max-width: 800px) {
+  .page-get-involved .header-inner {
+    min-height: 84px;
+  }
+  .page-get-involved .involved-hero-grid {
+    grid-template-columns: 38% 62%;
+  }
+  .page-get-involved .host-poster {
+    align-self: center;
+  }
+  .page-get-involved .involved-intro {
+    padding: 30px 24px;
+  }
+  .page-get-involved .involved-intro h1 {
+    font-size: 36px;
+  }
+  .page-get-involved .story-feature .artwork {
+    aspect-ratio: 2;
+    height: auto;
+  }
+  .page-get-involved .belonging-message {
+    aspect-ratio: auto;
+  }
+}
+@media (max-width: 540px) {
+  .page-get-involved .involved-hero-grid {
+    grid-template-columns: 1fr;
+  }
+  .page-get-involved .host-poster {
+    max-width: 100%;
+    margin: 0;
+  }
+  .page-get-involved .host-poster img {
+    height: auto;
+  }
+  .page-get-involved .involved-intro {
+    padding: 36px 20px;
+  }
+  .page-get-involved .involved-intro h1 {
+    font-size: clamp(34px, 9vw, 46px);
+  }
+  .page-get-involved .involved-intro .eyebrow {
+    font-size: 10px;
+  }
+  .page-get-involved .involved-content,
+  .page-get-involved .contact {
+    padding-block: 36px;
+  }
+  .page-get-involved .story-feature .card-body {
+    padding: 24px;
+  }
+  .page-get-involved .card-body p {
+    font-size: 16px;
+  }
+  .page-get-involved .belonging-message {
+    aspect-ratio: 1.5;
+  }
+  .page-get-involved .contact .two-columns {
+    gap: 36px;
+  }
+  .page-get-involved .contact .text-link {
+    font-size: 14px;
+  }
+}

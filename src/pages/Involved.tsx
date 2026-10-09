@@ -9,8 +9,8 @@ export function Involved() {
             <img
               src={imageUrl("social-host.png")}
               alt="Call for social hosts. Love meeting new people? BOP handles the planning. Apply through the social-host form."
-              width="480"
-              height="640"
+              width="852"
+              height="1069"
             />
           </a>
           <div className="involved-intro">
@@ -89,7 +89,8 @@ export function Involved() {
                 <h3>Become a BOP social host.</h3>
                 <p>
                   Want to bring people together for cha, a walk, or a game? Tell
-                  us a bit about yourself and the gatherings you’d like to host.
+                  us a bit about yourself and the gatherings you’d like to host
+                  through the BOP social host form.
                 </p>
                 <a className="text-link" href={links.host}>
                   Fill out the social-host form{" "}
@@ -99,21 +100,15 @@ export function Involved() {
             </article>
             <article className="involvement-card belonging-card">
               <div className="belonging-message">
-                <span aria-hidden="true">✷</span>
-                <p>
-                  Come on your own.
-                  <br />
-                  Bring a friend.
-                  <br />
-                  You’re welcome here.
-                </p>
+                <span aria-hidden="true">📷</span>
+                <p>Community photos coming soon.</p>
               </div>
               <div className="card-body">
                 <p className="eyebrow">Our community</p>
                 <h3>Built on belonging.</h3>
                 <p>
-                  Bangladeshis and honorary Bengalis. A familiar language, a
-                  shared interest, or just a reason to get out of the house.
+                  Bangladeshis and honorary Bengalis. Come on your own or bring
+                  a friend. Everyone is welcome here.
                 </p>
                 <a className="text-link" href="#/our-story">
                   Read our story <span aria-hidden="true">↗</span>

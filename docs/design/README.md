@@ -50,3 +50,11 @@ to sRGB first: Home green #2F6755, red #C8122E, cream #FFF9EE, gold #E3BC53.
 Do not copy collaborator markers, invisible CTA labels, or internal archive notes.
 The existing Heylo links remain authoritative. The email signup requires a real
 service before enabling it; the current demo uses a working Heylo updates CTA.
+
+## User-supplied Get involved references
+
+The updated Get involved overview and four section screenshots take precedence
+over the previous capture. Source metadata is in the manifest. The standalone
+852 x 1069 host flyer is saved as `public/images/social-host.png` and used directly.
+The other screenshots remain references only. Dark teal and rust are scoped to
+Get involved so the Home palette remains unchanged.
