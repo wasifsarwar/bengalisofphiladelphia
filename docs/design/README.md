@@ -12,8 +12,7 @@ They replace the older cream-background captures outside this repository.
 
 See [manifest.json](manifest.json) for exact source links, individual capture times,
 dimensions, and SHA-256 hashes. Filename roles stay stable even if collaborators
-rename a frame. BOP FINAL currently displays an IRL Connections hero; this mapping
-does not establish the final navigation name.
+rename a frame. BOP FINAL currently displays an IRL Connections hero; the user has now confirmed that this frame maps to Our story.
 
 ## Refresh rule
 

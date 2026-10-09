@@ -33,7 +33,7 @@ to IRL Connections, with blue/gold details and gold media placeholders. Follow t
 
 ## Implementation concerns to resolve
 
-- Confirm whether BOP FINAL is the intended Our story frame, not a replacement home.
+- User confirmed BOP FINAL is Our story. Keep node 7:46 as Home / upcoming events.
 - Obtain original flyer, logo and photos instead of recreating them from screenshots.
 - Some red headings and muted body text appear low contrast on dark backgrounds;
   measure actual colors during implementation and preserve readability.

@@ -1,8 +1,8 @@
 # Bengalis of Philadelphia website
 
 Local repository for implementing BOP's community website from the collaborative
-Figma design. Created October 8, 2026. A React/TypeScript/Vite holding page is live; the full
-Figma implementation is still to come.
+Figma design. Created October 8, 2026. The first React/TypeScript/Vite implementation is live, with Home / upcoming
+events, Our story, and Get involved pages.
 
 ## Scope
 
@@ -54,9 +54,20 @@ The build runs strict TypeScript checking before Vite. Publish by committing
 and pushing to `main`; check the Pages workflow completes before sharing an update.
 Agent tooling dependencies remain separate under `.tools/mcp/`.
 
-Next: confirm the latest Figma frames and implement the responsive site.
-Future client-side routes must account for GitHub Pages lacking an SPA rewrite
-(use hash routing or generate real page files).
+Navigation uses hash routes so direct links and refreshes work on GitHub Pages:
+- Home / events: `#/`
+- Our story (Figma BOP FINAL): `#/our-story`
+- Get involved: `#/get-involved`
+
+Event proposals and external destinations live in `src/data/content.ts`. The
+category filters work locally. All registration buttons currently open the supplied
+Heylo community URL because event-specific URLs and dates are not yet confirmed.
+Email links open the visitor's email app. The social-host form opens Google Forms.
+The updates panel links to Heylo; there is no email subscription backend.
+
+See [implementation status](docs/implementation-status.md) for validation and the
+remaining artwork/content limitations. This is a working first demo, not a claim
+of pixel-perfect equivalence to a Figma file that is still being edited.
 
 ## Agent tooling
 
