@@ -30,7 +30,9 @@ export function Involved() {
               the next gathering. You don’t need to know anyone already.
               Bangladeshis and honorary Bengalis are welcome.
             </p>
-            <p className="build-together">Let’s build this together.</p>
+            <a className="button button-rust" href={links.host}>
+              Become a social host <span aria-hidden="true">↗</span>
+            </a>
           </div>
         </div>
       </section>
