@@ -6,6 +6,9 @@
   --coral: #cf6858;
   background: var(--ink);
 }
+.page-get-involved .container {
+  width: min(1600px, 90%);
+}
 .page-get-involved .community-strip {
   border-top: 20px solid transparent;
   border-image: repeating-linear-gradient(
@@ -21,10 +24,16 @@
 }
 .page-get-involved .header-inner {
   min-height: 108px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+}
+.page-get-involved .header-join {
+  justify-self: end;
 }
 .page-get-involved .involved-hero-grid {
   width: 100%;
   max-width: none;
+  grid-template-columns: min(34%, 560px) minmax(0, 1fr);
 }
 .page-get-involved .host-poster {
   align-self: stretch;
@@ -82,16 +91,19 @@
 }
 .page-get-involved .story-feature {
   border: 1px solid var(--rust);
+  background: var(--gold);
 }
 .page-get-involved .story-feature .artwork {
-  align-self: stretch;
-  height: 100%;
+  align-self: center;
+  height: auto;
   object-fit: contain;
-  aspect-ratio: 1.55;
+  aspect-ratio: 2;
   background: var(--gold);
 }
 .page-get-involved .story-feature .card-body {
   padding: 34px;
+  justify-content: center;
+  background: var(--deep);
 }
 .page-get-involved .story-feature h3 {
   font-size: clamp(30px, 3.2vw, 46px);
@@ -144,7 +156,8 @@
   border-color: var(--gold);
 }
 .page-get-involved .belonging-message {
-  aspect-ratio: 1.4;
+  aspect-ratio: 2;
+  min-height: 0;
   background: #301c0c;
   justify-content: center;
   flex-direction: column;
@@ -192,8 +205,16 @@
   }
 }
 @media (max-width: 800px) {
+  .page-get-involved .container {
+    width: calc(100% - 40px);
+  }
+  .page-get-involved .involved-hero-grid {
+    width: 100%;
+  }
   .page-get-involved .header-inner {
     min-height: 84px;
+    display: flex;
+    flex-wrap: wrap;
   }
   .page-get-involved .involved-hero-grid {
     grid-template-columns: 38% 62%;
