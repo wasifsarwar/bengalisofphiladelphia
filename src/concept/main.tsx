@@ -6,7 +6,7 @@ import "@fontsource/dm-sans/latin-600.css";
 import "@fontsource/cormorant-garamond/latin-500.css";
 import "@fontsource/cormorant-garamond/latin-500-italic.css";
 import "@fontsource/cormorant-garamond/latin-600.css";
-import { links } from "../data/content";
+import { imageUrl, links } from "../data/content";
 import "./style.css";
 
 function Flower({ className = "" }: { className?: string }) {
@@ -20,16 +20,18 @@ function Flower({ className = "" }: { className?: string }) {
   );
 }
 
-type PhotoSpaceProps = { className?: string; caption: string; tone?: string };
-function PhotoSpace({ className = "", caption, tone = "sand" }: PhotoSpaceProps) {
+type PhotoSpaceProps = { className?: string; caption: string; tone?: string; image?: string; alt?: string };
+function PhotoSpace({ className = "", caption, tone = "sand", image, alt }: PhotoSpaceProps) {
   return (
     <figure className={`photo-space photo-${tone} ${className}`}>
-      <div className="photo-surface" role="img" aria-label={`Photo placeholder: ${caption}`}>
+      <div className="photo-surface" role={image ? undefined : "img"} aria-label={image ? undefined : `Photo placeholder: ${caption}`}>
+        {image ? <img src={imageUrl(`community/${image}`)} alt={alt ?? caption} /> : <>
         <span className="photo-corner corner-tl" aria-hidden="true" />
         <span className="photo-corner corner-tr" aria-hidden="true" />
         <span className="photo-corner corner-bl" aria-hidden="true" />
         <span className="photo-corner corner-br" aria-hidden="true" />
         <span className="photo-label"><Flower />Photo to come</span>
+        </>}
       </div>
       <figcaption>{caption}</figcaption>
     </figure>
@@ -74,8 +76,8 @@ function App() {
             <p className="welcome-note">Bengalis & honorary Bengalis welcome.</p>
           </div>
           <div className="hero-collage">
-            <PhotoSpace className="hero-photo-main" caption="Good company, right here in Philly." />
-            <PhotoSpace className="hero-photo-small" caption="A little cha. A little adda." tone="rose" />
+            <PhotoSpace className="hero-photo-main" image="BOP_Hike.png" alt="BOP members gathered on a wooded hiking trail" caption="Good company, out on the trail." />
+            <PhotoSpace className="hero-photo-small" image="BOP_Game_Night.png" alt="BOP members posing together at game night" caption="Game night. Good company." tone="rose" />
             <div className="belonging-stamp"><span>There’s room<br />for you here.</span><Flower /></div>
             <p className="collage-note">Making room for new memories.</p>
           </div>

@@ -43,8 +43,8 @@ Source maps are disabled. The preview requests search engines not to index it.
 
 The fresh editorial homepage concept is available at `concept.html` under the
 local development URL. It includes six reserved photo spaces and working
-community links. See [concept notes](docs/homepage-concept.md). The original
-site entry remains available at the root; the build validates both entries.
+community links. See [concept notes](docs/homepage-concept.md). The new homepage also loads at the root URL used by GitHub Pages. The build
+validates both entries.
 
 Use Node 24 LTS and run:
 

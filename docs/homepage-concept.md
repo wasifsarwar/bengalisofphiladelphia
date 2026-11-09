@@ -1,6 +1,6 @@
 # Homepage concept, November 8, 2026
 
-The user requested a fresh desktop homepage inspired by Book & Sip Club, with reserved photo spaces. This is an independent concept entry at `concept.html`; it does not replace the previous site entry or change its published version.
+The user requested a fresh desktop homepage inspired by Book & Sip Club, with reserved photo spaces. The new homepage is served at both the root entry and `concept.html`. The root entry was updated so GitHub Pages displays the latest design.
 
 ## Design plan
 
@@ -26,7 +26,7 @@ The cream, red, expressive serif, and photo-print composition intentionally foll
 
 ## Photo slots
 
-Six reusable `PhotoSpace` components reserve stable image proportions: two portrait/near-square hero photos, one large story image, and three landscape gathering images. Replace the `photo-surface` contents with images and factual alternative text when real photography is supplied. Keep `object-fit: cover` and these layout proportions. Hero photos should remain candid; gathering cards currently describe proposed activities.
+Six reusable `PhotoSpace` components provide stable image proportions. The two hero slots now use the supplied BOP hike and game-night images; four placeholders remain. The layout includes: two portrait/near-square hero photos, one large story image, and three landscape gathering images. Replace the `photo-surface` contents with images and factual alternative text when real photography is supplied. Keep `object-fit: cover` and these layout proportions. Hero photos should remain candid; gathering cards currently describe proposed activities.
 
 ## Preview and validation
 
