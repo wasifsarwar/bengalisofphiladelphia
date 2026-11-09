@@ -274,3 +274,40 @@ em { font-weight: 500; }
 /* Real hero photographs retain their full group compositions. */
 .photo-surface > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .hero-photo-small .photo-surface { aspect-ratio: 4 / 3; }
+
+/* A single opening sequence and feedback tied to deliberate interaction. */
+@media (prefers-reduced-motion: no-preference) {
+  :root { --motion-fast: 180ms; --motion-ease: cubic-bezier(.2, .7, .2, 1); }
+  .hero-copy { animation: welcome-in 650ms var(--motion-ease) both; }
+  .hero-collage { animation: welcome-in 750ms 100ms var(--motion-ease) both; }
+  .button { transition: background var(--motion-fast), color var(--motion-fast), translate var(--motion-fast) var(--motion-ease), box-shadow var(--motion-fast); }
+  .button > span, .quiet-link > span, .text-link > span { transition: translate var(--motion-fast) var(--motion-ease); }
+  .text-link { transition: opacity var(--motion-fast); }
+  .round-arrow { transition: color var(--motion-fast), background var(--motion-fast), border-color var(--motion-fast), rotate 250ms var(--motion-ease); }
+  .button:active { translate: 0 1px; }
+  .navigation a { position: relative; }
+  .navigation a::after { content: ""; position: absolute; bottom: 7px; left: 0; width: 100%; height: 1px; background: currentColor; scale: 0 1; transform-origin: left; transition: scale 220ms var(--motion-ease); }
+  .navigation a:focus-visible::after { scale: 1; }
+  @media (hover: hover) and (pointer: fine) {
+    .button:hover { translate: 0 -2px; box-shadow: 0 4px 10px #802a3214; }
+    .button:hover > span, .text-link:hover > span { translate: 2px -2px; }
+    .quiet-link:hover > span { translate: 0 3px; }
+    .navigation a:hover { text-decoration: none; }
+    .navigation a:hover::after { scale: 1; }
+    .involvement-link:hover .round-arrow { rotate: 45deg; }
+  }
+  @media (max-width: 850px) {
+    .navigation.open { animation: menu-in 200ms var(--motion-ease) both; }
+  }
+}
+@keyframes welcome-in {
+  from { opacity: 0; translate: 0 14px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@keyframes menu-in {
+  from { opacity: 0; translate: 0 -6px; }
+  to { opacity: 1; translate: 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

@@ -38,3 +38,15 @@ Shared Heylo, Instagram, email, and host application URLs are maintained in
 `src/data/content.ts`. The mobile menu supports Escape, expanded-state reporting,
 and closing after navigation. Focus styling and reduced-motion preferences are
 supported. The former `concept.html` URL redirects to the main page.
+
+## Motion
+
+Use CSS motion only while `prefers-reduced-motion: no-preference` is active.
+The opening text and collage enter once over 650–750 ms. Buttons, link arrows,
+and navigation underlines provide short interaction feedback; the phone menu
+enters over 200 ms. Keep the existing smooth anchor scrolling. Reduced-motion
+preferences disable animation, transitions, and smooth scrolling, including
+pseudo-elements. Content remains visible without animation support.
+
+Do not add looping motion, repeated scroll reveals, or an animation dependency
+for these simple effects.
