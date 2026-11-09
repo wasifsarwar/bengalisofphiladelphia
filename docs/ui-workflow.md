@@ -11,13 +11,15 @@ Checked November 9, 2026.
 - Figma tools are available when the user supplies or requests a Figma design.
   Routine CSS edits do not need Figma calls.
 
-## Present locally, not exposed in the current chat
+## Installed MCP servers
 
 The repository `.codex/config.toml` configures Serena, Context7, and Memory.
 Context7 4.2.0 and Memory 2026.8.31 are installed under `.tools/mcp/`;
 Serena's pinned source and uvx launcher are present. The current chat's tool list
-and CLI MCP listing do not expose these three servers. Files on disk do not
-prove an active connection. Open `bop-site` itself as the Codex project, review
+and CLI MCP listing do not expose these three servers. A direct MCP client subsequently connected successfully to Serena and Context7:
+Serena returned the App symbol overview, and Context7 retrieved MDN documentation.
+They are usable through a direct client without reinstalling. This does not register
+them as native tools in this already-running chat. Memory has not been exercised. Open `bop-site` itself as the Codex project, review
 its project trust/configuration, and verify the servers are listed after reopening.
 Do not weaken trust controls or duplicate these servers globally to work around it.
 

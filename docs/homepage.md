@@ -42,11 +42,13 @@ supported. The former `concept.html` URL redirects to the main page.
 ## Motion
 
 Use CSS motion only while `prefers-reduced-motion: no-preference` is active.
-The opening text and collage enter once over 650–750 ms. Buttons, link arrows,
+The opening text and collage enter once over 950–1100 ms. Buttons, link arrows,
 and navigation underlines provide short interaction feedback; the phone menu
 enters over 200 ms. Keep the existing smooth anchor scrolling. Reduced-motion
 preferences disable animation, transitions, and smooth scrolling, including
 pseudo-elements. Content remains visible without animation support.
 
-Do not add looping motion, repeated scroll reveals, or an animation dependency
-for these simple effects.
+Story, gathering, participation, and join groups reveal once when entering view,
+using IntersectionObserver with cleanup and live reduced-motion preference handling.
+Content already visible on load stays visible. Keyboard focus reveals pending content.
+Do not add looping motion or an animation dependency for these effects.

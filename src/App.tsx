@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useScrollReveal } from "./hooks/useScrollReveal";
 import { links } from "./data/content";
 import { Flower } from "./components/Flower";
 import { PhotoSpace } from "./components/PhotoSpace";
@@ -8,6 +9,7 @@ export function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const main = useRef<HTMLElement>(null);
+  useScrollReveal(main);
   const closeMenu = () => setMenuOpen(false);
   return (
     <>
