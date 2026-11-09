@@ -28,7 +28,6 @@ em { font-weight: 500; }
 .wrap { width: min(1280px, calc(100% - 112px)); margin-inline: auto; }
 .skip-link { position: fixed; top: 12px; left: 12px; padding: 16px 24px; z-index: 10; color: var(--cream); background: var(--green); transform: translateY(-180%); }
 .skip-link:focus { transform: none; }
-.welcome-strip { background: var(--green); color: var(--cream); text-align: center; font-size: 11px; letter-spacing: .04em; padding: 10px 16px; }
 .header { border-bottom: 1px solid var(--line); }
 .header-inner { display: flex; align-items: center; gap: 42px; min-height: 100px; }
 .brand { display: inline-flex; }
@@ -203,7 +202,6 @@ em { font-weight: 500; }
 }
 @media (max-width: 600px) {
   .wrap { width: calc(100% - 40px); }
-  .welcome-strip { font-size: 10px; padding-block: 9px; }
   .header-inner { gap: 14px; min-height: 80px; }
   .wordmark-bop { font-size: 43px; }
   .wordmark-name { font-size: 9px; }
@@ -312,12 +310,16 @@ em { font-weight: 500; }
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 
-/* Reveal each editorial group once as it enters view. */
+/* Replay editorial reveals when returning from either scroll direction. */
 @media (prefers-reduced-motion: no-preference) {
   .scroll-reveal { opacity: 0; translate: 0 36px; transition: opacity 800ms var(--motion-ease), translate 800ms var(--motion-ease); }
   .story-image.scroll-reveal { translate: -28px 22px; }
   .story-copy.scroll-reveal { translate: 28px 22px; }
   .gathering.scroll-reveal:nth-child(2) { transition-delay: 120ms; }
   .gathering.scroll-reveal:nth-child(3) { transition-delay: 240ms; }
+  .scroll-reveal:not(.is-revealed) { transition-duration: 0s; transition-delay: 0s; }
   .scroll-reveal.is-revealed, .scroll-reveal:focus-within { opacity: 1; translate: 0 0; }
 }
+
+/* Preserve the full portrait composition inside the gathering card. */
+.photo-game .photo-surface > img { object-fit: contain; }

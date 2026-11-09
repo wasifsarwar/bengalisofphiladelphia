@@ -9,3 +9,6 @@ coverage/
 .local/
 .serena/cache/
 .serena/memories/
+
+.github/
+.codex/

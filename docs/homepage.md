@@ -23,7 +23,9 @@ configured base path. Supply descriptive alternative text for each real image.
 - Large hero frame: `BOP_Hike.png`.
 - Front hero frame: `BOP_Game_Night.png`, with a landscape frame to preserve the group.
 - Story frame: `BOP_Craft_Event.png`, preserving the full group.
-- Three gathering frames: placeholders awaiting selected photos.
+- Games gathering frame: `BOP_Bhoot_Game.png`, shown uncropped.
+- Cha and adda frame: `BOP_Cat_Event.png`.
+- Outdoors gathering frame: placeholder awaiting a selected photo.
 
 Original BOP logo and social-host artwork are retained as source assets. Additional
 community uploads should not be removed or automatically placed without direction.
@@ -48,7 +50,8 @@ enters over 200 ms. Keep the existing smooth anchor scrolling. Reduced-motion
 preferences disable animation, transitions, and smooth scrolling, including
 pseudo-elements. Content remains visible without animation support.
 
-Story, gathering, participation, and join groups reveal once when entering view,
+Story, gathering, participation, and join groups reveal when entering view from either direction,
 using IntersectionObserver with cleanup and live reduced-motion preference handling.
+Groups reset only after moving fully offscreen, with an 80px buffer to prevent edge flicker.
 Content already visible on load stays visible. Keyboard focus reveals pending content.
 Do not add looping motion or an animation dependency for these effects.
