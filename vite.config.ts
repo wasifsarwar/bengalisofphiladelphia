@@ -6,6 +6,5 @@ export default defineConfig({
   base: '/bengalisofphiladelphia/',
   build: {
     sourcemap: false,
-    rollupOptions: { input: { main: 'index.html', concept: 'concept.html' } },
   },
 });

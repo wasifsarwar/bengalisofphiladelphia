@@ -1,48 +1,10 @@
-import { StrictMode, useRef, useState } from "react";
-import { createRoot } from "react-dom/client";
-import "@fontsource/dm-sans/latin-400.css";
-import "@fontsource/dm-sans/latin-500.css";
-import "@fontsource/dm-sans/latin-600.css";
-import "@fontsource/cormorant-garamond/latin-500.css";
-import "@fontsource/cormorant-garamond/latin-500-italic.css";
-import "@fontsource/cormorant-garamond/latin-600.css";
-import { imageUrl, links } from "../data/content";
-import "./style.css";
+import { useRef, useState } from "react";
+import { links } from "./data/content";
+import { Flower } from "./components/Flower";
+import { PhotoSpace } from "./components/PhotoSpace";
+import { Wordmark } from "./components/Wordmark";
 
-function Flower({ className = "" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 80 80" fill="none" aria-hidden="true">
-      {Array.from({ length: 8 }, (_, i) => (
-        <ellipse key={i} cx="40" cy="21" rx="7" ry="16" transform={`rotate(${i * 45} 40 40)`} stroke="currentColor" strokeWidth="1.3" />
-      ))}
-      <circle cx="40" cy="40" r="5" fill="currentColor" />
-    </svg>
-  );
-}
-
-type PhotoSpaceProps = { className?: string; caption: string; tone?: string; image?: string; alt?: string };
-function PhotoSpace({ className = "", caption, tone = "sand", image, alt }: PhotoSpaceProps) {
-  return (
-    <figure className={`photo-space photo-${tone} ${className}`}>
-      <div className="photo-surface" role={image ? undefined : "img"} aria-label={image ? undefined : `Photo placeholder: ${caption}`}>
-        {image ? <img src={imageUrl(`community/${image}`)} alt={alt ?? caption} /> : <>
-        <span className="photo-corner corner-tl" aria-hidden="true" />
-        <span className="photo-corner corner-tr" aria-hidden="true" />
-        <span className="photo-corner corner-bl" aria-hidden="true" />
-        <span className="photo-corner corner-br" aria-hidden="true" />
-        <span className="photo-label"><Flower />Photo to come</span>
-        </>}
-      </div>
-      <figcaption>{caption}</figcaption>
-    </figure>
-  );
-}
-
-function Wordmark() {
-  return <span className="wordmark"><span className="wordmark-bop">bop<span>.</span></span><span className="wordmark-name">Bengalis of<br />Philadelphia</span></span>;
-}
-
-function App() {
+export function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const main = useRef<HTMLElement>(null);
@@ -88,7 +50,7 @@ function App() {
         </div>
 
         <section className="story wrap" id="our-story" aria-labelledby="story-heading">
-          <div className="story-image"><PhotoSpace caption="Our people. Our city." tone="olive" /><span className="story-image-note">A place to find your people.</span></div>
+          <div className="story-image"><PhotoSpace image="BOP_Craft_Event.png" alt="BOP members gathered around a craft table at a community event" caption="Our people. Our city." tone="olive" /><span className="story-image-note">A place to find your people.</span></div>
           <div className="story-copy">
             <p className="section-label">Meet Bengalis of Philadelphia</p>
             <h2 id="story-heading">There’s always<br />room for<br /><em>one more.</em></h2>
@@ -128,4 +90,3 @@ function App() {
   );
 }
 
-createRoot(document.getElementById("root")!).render(<StrictMode><App /></StrictMode>);

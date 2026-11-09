@@ -6,34 +6,20 @@ correctness, user intent, and necessary validation.
 
 ## Project essentials
 
-### Visual design reference and refresh trigger
+### Current design and application
 
-- Use `docs/design/images/` as the checked-in visual implementation reference.
-  Read `docs/design/README.md` and `docs/design/manifest.json` for frame mappings,
-  capture timestamps, and image-quality limitations. Older `../exports/` images
-  are superseded; do not implement from them.
-- When the user says the design is updated (or equivalent), refresh the Figma file,
-  download/export or recapture the tracked frames, and replace the images under
-  the SAME filenames before implementing further UI changes. Inspect the new
-  images, update timestamps/hashes/frame names in the manifest, and summarize the
-  material differences. The user's message authorizes this refresh; do not ask
-  again. Do not schedule background monitoring unless explicitly requested.
-- Prefer native full-resolution Figma exports when available. If unavailable,
-  capture browser screenshots and label their limitations. Never silently keep
-  old images or mark a failed refresh as current. Add new frame references when
-  the design adds pages; preserve prior versions through Git, not duplicate folders.
+The approved editorial homepage is the only active application. The earlier
+Figma implementation and screenshots are retired; do not restore or follow them.
+Use `src/App.tsx`, `src/style.css`, and `docs/homepage.md` as the current reference.
+The root `index.html` loads `src/main.tsx`; `public/concept.html` only redirects
+old preview links to the homepage. There is no separate concept app or router.
 
-This repository is for the Bengalis of Philadelphia website. See README.md for
-scope and docs/design-reference.md for the current Figma reference.
-The required stack is TypeScript (strict mode) and Vite, with React for UI and
-plain CSS with shared design tokens for the Figma styling. Application dependencies
-are installed at the repository root. Add libraries only for a concrete feature or validation
-need; avoid a large UI kit that overrides the approved design. Do not replace Vite
-with another framework without user direction. Do not inherit transit, map, or
-deployment assumptions from the source repository.
+Use React, strict TypeScript, Vite, and plain CSS. Preserve the approved cream,
+red, and green design, serif typography, photo frames, and existing behavior.
+Keep reusable visual components in `src/components/`, destinations in
+`src/data/content.ts`, and community photographs in `public/images/community/`.
+Do not replace Vite or introduce a UI kit without a concrete need.
 
-- Preserve the current approved visual direction. Recheck affected Figma frames
-  before implementing them because collaborators are actively editing the file.
 - BOP is a Bangladeshi/Bengali community rooted in Bangladesh. Honorary Bengalis
   are welcome. Always spell cha, never chai. Avoid em dashes and generic promotional
   copy. Keep wording plain, friendly, and culturally specific.
@@ -68,7 +54,7 @@ deployment assumptions from the source repository.
   Use official documentation as a fallback. Reuse answers already verified.
 - Use `.agents/skills/frontend-design/SKILL.md` (Anthropic's frontend-design skill)
   for substantive UI work. Its two-pass plan/build/critique process must preserve
-  the approved Figma direction, BOP copy preferences, and collaborator changes.
+  the approved homepage direction, BOP copy preferences, and collaborator changes.
   Do not introduce another memory store or redesign the palette merely because
   a generic skill example recommends a different aesthetic. Follow the Figma
   design-to-code skill before requesting design context or implementing Figma.
