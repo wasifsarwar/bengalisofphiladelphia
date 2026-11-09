@@ -69,7 +69,7 @@ export function App() {
             </div>
             <div className="gathering-grid">
               <article className="gathering"><PhotoSpace image="BOP_Cat_Event.png" alt="BOP members spending time together with cats at a community outing" caption="For the conversations that keep going." tone="rose" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Cha & adda</h3><p>A cup of cha, something to snack on, and plenty to catch up about.</p></div></article>
-              <article className="gathering"><PhotoSpace caption="For getting to know our city." tone="sand" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Out around Philly</h3><p>Riverside walks, museum days, and a few new favorite corners of the city.</p></div></article>
+              <article className="gathering"><PhotoSpace image="BOP_Bok_Bar.png" alt="Friends at Bok Bar with the Philadelphia skyline at sunset" caption="For getting to know our city." tone="sand" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Out around Philly</h3><p>Riverside walks, museum days, and a few new favorite corners of the city.</p></div></article>
               <article className="gathering"><PhotoSpace className="photo-game" image="BOP_Bhoot_Game.png" alt="Friends enjoying a BOP game night with a celebratory inset photo" caption="For a little friendly competition." tone="olive" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Games & good company</h3><p>Bring your competitive side, a game suggestion, or just yourself.</p></div></article>
             </div>
           </div>

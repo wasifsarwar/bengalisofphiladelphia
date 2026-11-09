@@ -25,7 +25,7 @@ configured base path. Supply descriptive alternative text for each real image.
 - Story frame: `BOP_Craft_Event.png`, preserving the full group.
 - Games gathering frame: `BOP_Bhoot_Game.png`, shown uncropped.
 - Cha and adda frame: `BOP_Cat_Event.png`.
-- Outdoors gathering frame: placeholder awaiting a selected photo.
+- Outdoors gathering frame: `BOP_Bok_Bar.png`.
 
 Original BOP logo and social-host artwork are retained as source assets. Additional
 community uploads should not be removed or automatically placed without direction.

@@ -1,4 +1,10 @@
-export function Wordmark() {
-  return <span className="wordmark"><span className="wordmark-bop">bop<span>.</span></span><span className="wordmark-name">Bengalis of<br />Philadelphia</span></span>;
-}
+import { imageUrl } from "../data/content";
 
+export function Wordmark() {
+  return (
+    <span className="wordmark">
+      <img className="brand-logo" src={imageUrl("bop-logo.jpg")} alt="" width="1290" height="1281" />
+      <span className="wordmark-name">Bengalis of<br />Philadelphia</span>
+    </span>
+  );
+}
