@@ -1,6 +1,6 @@
 # UI development tools and context budget
 
-Checked November 9, 2026.
+Updated November 10, 2026.
 
 ## Available now
 
@@ -43,3 +43,22 @@ Sources:
 - https://developers.openai.com/plugins/build/plugins
 - https://oraios.github.io/serena/01-about/000_intro
 - https://github.com/upstash/context7/blob/master/packages/mcp/README.md
+
+## Installed skills (November 10, 2026)
+
+User-level skills under `~/.codex/skills/`:
+
+- `ponytail` and `ponytail-audit`: DietrichGebert/ponytail, `skills/`.
+- `frontend-design`: anthropics/skills, `skills/frontend-design`.
+- `impeccable`: pbakaus/impeccable, `.agents/skills/impeccable`.
+
+The existing project-local frontend-design copy is preserved. New skills become
+available for automatic discovery on the next turn; their instructions can also
+be read and followed directly in the current task. Ponytail audit is a report,
+not a code indexer. Serena supplies the symbol index. No token savings have been
+measured. Load only the selected command reference rather than all design guides.
+
+Use `ponytail-audit` for repo quality; use `impeccable critique` for usability.
+Impeccable's launcher lives at `~/.codex/skills/impeccable/scripts/impeccable`.
+Its `context`, `detect`, and `critique-storage` commands support the critique
+workflow; critique itself is an agent playbook, not a standalone shell report.

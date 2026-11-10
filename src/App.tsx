@@ -39,8 +39,8 @@ export function App() {
             <p className="welcome-note">Bengalis & honorary Bengalis welcome.</p>
           </div>
           <div className="hero-collage">
-            <PhotoSpace className="hero-photo-main" image="BOP_Hike.png" alt="BOP members gathered on a wooded hiking trail" caption="Good company, out on the trail." />
-            <PhotoSpace className="hero-photo-small" image="BOP_Game_Night.png" alt="BOP members posing together at game night" caption="Game night. Good company." tone="rose" />
+            <PhotoSpace loading="eager" className="hero-photo-main" image="BOP_Hike.png" alt="BOP members gathered on a wooded hiking trail" caption="Good company, out on the trail." />
+            <PhotoSpace loading="eager" className="hero-photo-small" image="BOP_Game_Night.png" alt="BOP members posing together at game night" caption="Game night. Good company." tone="rose" />
             <div className="belonging-stamp"><span>There’s room<br />for you here.</span><Flower /></div>
             <p className="collage-note">Making room for new memories.</p>
           </div>

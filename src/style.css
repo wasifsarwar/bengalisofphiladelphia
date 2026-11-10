@@ -267,7 +267,6 @@ em { font-weight: 500; }
   .footer-links { flex-basis: 100%; gap: 35px; }
   .footer-bottom { font-size: 9px; padding-block: 20px; }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 
 /* Real hero photographs retain their full group compositions. */
 .photo-surface > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -277,7 +276,9 @@ em { font-weight: 500; }
 @media (prefers-reduced-motion: no-preference) {
   :root { --motion-fast: 180ms; --motion-ease: cubic-bezier(.2, .7, .2, 1); }
   .hero-copy { animation: welcome-in 950ms var(--motion-ease) both; }
-  .hero-collage { animation: welcome-in 1100ms 150ms var(--motion-ease) both; }
+  .hero-photo-main { --print-turn: -4deg; animation: print-settle 700ms var(--motion-ease) backwards; }
+  .hero-photo-small { --print-turn: 6deg; animation: print-settle 700ms 140ms var(--motion-ease) backwards; }
+  .hero-photo-main, .hero-photo-small { transition: transform 350ms var(--motion-ease), box-shadow 350ms var(--motion-ease); }
   .button { transition: background var(--motion-fast), color var(--motion-fast), translate var(--motion-fast) var(--motion-ease), box-shadow var(--motion-fast); }
   .button > span, .quiet-link > span, .text-link > span { transition: translate var(--motion-fast) var(--motion-ease); }
   .text-link { transition: opacity var(--motion-fast); }
@@ -287,6 +288,8 @@ em { font-weight: 500; }
   .navigation a::after { content: ""; position: absolute; bottom: 7px; left: 0; width: 100%; height: 1px; background: currentColor; scale: 0 1; transform-origin: left; transition: scale 220ms var(--motion-ease); }
   .navigation a:focus-visible::after { scale: 1; }
   @media (hover: hover) and (pointer: fine) {
+    .hero-photo-main:hover { transform: translateY(-6px) rotate(2deg); box-shadow: 2px 12px 24px #4e37232b; }
+    .hero-photo-small:hover { transform: translateY(-6px) rotate(-4deg); box-shadow: 2px 12px 24px #4e37232b; }
     .button:hover { translate: 0 -2px; box-shadow: 0 4px 10px #802a3214; }
     .button:hover > span, .text-link:hover > span { translate: 2px -2px; }
     .quiet-link:hover > span { translate: 0 3px; }
@@ -302,6 +305,10 @@ em { font-weight: 500; }
   from { opacity: 0; translate: 0 28px; }
   to { opacity: 1; translate: 0 0; }
 }
+@keyframes print-settle {
+  from { translate: 0 20px; rotate: var(--print-turn); opacity: .5; }
+  to { translate: 0 0; rotate: 0deg; opacity: 1; }
+}
 @keyframes menu-in {
   from { opacity: 0; translate: 0 -6px; }
   to { opacity: 1; translate: 0 0; }
@@ -315,8 +322,20 @@ em { font-weight: 500; }
   .scroll-reveal { opacity: 0; translate: 0 36px; transition: opacity 800ms var(--motion-ease), translate 800ms var(--motion-ease); }
   .story-image.scroll-reveal { translate: -28px 22px; }
   .story-copy.scroll-reveal { translate: 28px 22px; }
-  .gathering.scroll-reveal:nth-child(2) { transition-delay: 120ms; }
-  .gathering.scroll-reveal:nth-child(3) { transition-delay: 240ms; }
+  .gathering.scroll-reveal { --card-delay: 0ms; transition-delay: var(--card-delay); }
+  .gathering.scroll-reveal:nth-child(2) { --card-delay: 80ms; }
+  .gathering.scroll-reveal:nth-child(3) { --card-delay: 160ms; }
+  .gathering.scroll-reveal figcaption, .gathering.scroll-reveal .gathering-copy {
+    opacity: 0; translate: 0 10px;
+    transition: opacity 420ms var(--motion-ease), translate 420ms var(--motion-ease);
+  }
+  .gathering.scroll-reveal.is-revealed figcaption { transition-delay: calc(var(--card-delay) + 90ms); }
+  .gathering.scroll-reveal.is-revealed .gathering-copy { transition-delay: calc(var(--card-delay) + 150ms); }
+  .gathering.scroll-reveal:is(.is-revealed, :focus-within) :is(figcaption, .gathering-copy) { opacity: 1; translate: 0 0; }
+  .gathering.scroll-reveal:not(.is-revealed) :is(figcaption, .gathering-copy) { transition-duration: 0s; transition-delay: 0s; }
+  @media (max-width: 600px) {
+    .gathering.scroll-reveal:nth-child(n) { --card-delay: 0ms; }
+  }
   .scroll-reveal:not(.is-revealed) { transition-duration: 0s; transition-delay: 0s; }
   .scroll-reveal.is-revealed, .scroll-reveal:focus-within { opacity: 1; translate: 0 0; }
 }

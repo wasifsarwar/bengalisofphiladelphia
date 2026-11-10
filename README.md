@@ -29,6 +29,9 @@ its base path for GitHub Pages. Source maps are disabled.
 - `src/components/`: reusable photo frame, flower motif, and wordmark.
 - `src/style.css`: design tokens, layouts, and responsive styling.
 - `src/data/content.ts`: shared community destinations and image URL helper.
+- `src/hooks/useScrollReveal.ts`: repeatable reveals, viewport reset, and reduced-motion handling.
+- `src/components/PhotoSpace.tsx`: image loading and framing; hero photos opt into eager loading.
+- `src/components/Wordmark.tsx`: circular logo and handwritten name.
 - `public/images/community/`: real community photos.
 - `public/concept.html`: compatibility redirect for earlier preview links.
 - `docs/homepage.md`: current design and content guidance.
@@ -50,3 +53,12 @@ should redirect to the root while preserving section anchors.
 Follow `AGENTS.md` for BOP copy and contribution rules. Repository-local agent
 configuration remains in `.codex/`, with supporting tools under `.tools/mcp/` and
 the frontend-design skill under `.agents/skills/frontend-design/`.
+
+## Focused code lookup
+
+Use this source layout as the codebase index before broad searches. Start at the
+owning file, then follow its imports. Serena indexes TypeScript symbols and excludes
+assets, bundled tools, installed skills, dependencies, build output, and critique
+archives via `.serena/project.yml`. Its generated cache stays untracked. Refresh
+it with `serena project index .` using the pinned Serena installation in
+`.codex/config.toml`; use symbol lookups for code and `rg` for CSS and copy.

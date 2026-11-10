@@ -18,7 +18,8 @@ join invitation. Preserve this design when making routine edits.
 
 `PhotoSpace` handles both real photos and intentional placeholders. Community
 image filenames are resolved beneath `public/images/community/` using Vite's
-configured base path. Supply descriptive alternative text for each real image.
+configured base path. Supply descriptive alternative text for each real image. Below-fold photos load
+lazily with asynchronous decoding; the hero pair loads eagerly.
 
 - Large hero frame: `BOP_Hike.png`.
 - Front hero frame: `BOP_Game_Night.png`, with a landscape frame to preserve the group.
@@ -44,7 +45,10 @@ supported. The former `concept.html` URL redirects to the main page.
 ## Motion
 
 Use CSS motion only while `prefers-reduced-motion: no-preference` is active.
-The opening text and collage enter once over 950–1100 ms. Buttons, link arrows,
+The opening text enters once over 950 ms. Hero photo prints settle into their
+collage over 700 ms, with the front print following after 140 ms. Fine-pointer
+hover gently straightens and lifts each print. Gathering captions and descriptions
+follow their photos by 90–150 ms; sibling stagger is removed on phones. Buttons, link arrows,
 and navigation underlines provide short interaction feedback; the phone menu
 enters over 200 ms. Keep the existing smooth anchor scrolling. Reduced-motion
 preferences disable animation, transitions, and smooth scrolling, including
