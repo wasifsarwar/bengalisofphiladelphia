@@ -1,12 +1,47 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useScrollReveal } from "./hooks/useScrollReveal";
 import { links } from "./data/content";
 import { Flower } from "./components/Flower";
 import { PhotoSpace } from "./components/PhotoSpace";
+import { PhotoGallery } from "./components/PhotoGallery";
+import { galleryPhotos } from "./data/gallery";
+import { Events } from "./components/Events";
 import { Wordmark } from "./components/Wordmark";
 
 export function App() {
+  const [photoIndex, setPhotoIndex] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+  const header = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const sections = ["our-story", "events", "gatherings", "get-involved"]
+      .map(id => document.getElementById(id)).filter((node): node is HTMLElement => !!node);
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const height = header.current?.getBoundingClientRect().height ?? 100;
+      document.documentElement.style.setProperty("--header-height", `${height}px`);
+      const readingLine = height + 60;
+      const current = sections.find(section => {
+        const bounds = section.getBoundingClientRect();
+        return bounds.top <= readingLine && bounds.bottom > readingLine;
+      });
+      setActiveSection(current?.id ?? "");
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const resize = new ResizeObserver(schedule);
+    if (header.current) resize.observe(header.current);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    update();
+    return () => {
+      cancelAnimationFrame(frame);
+      resize.disconnect();
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      document.documentElement.style.removeProperty("--header-height");
+    };
+  }, []);
   const menuButton = useRef<HTMLButtonElement>(null);
   const main = useRef<HTMLElement>(null);
   useScrollReveal(main);
@@ -14,16 +49,17 @@ export function App() {
   return (
     <>
       <a className="skip-link" href="#main" onClick={() => main.current?.focus()}>Skip to content</a>
-      <header className="header" onKeyDown={(event) => {
+      <header ref={header} className="header" onKeyDown={(event) => {
         if (event.key === "Escape" && menuOpen) { setMenuOpen(false); menuButton.current?.focus(); }
       }}>
         <div className="wrap header-inner">
           <a className="brand" href="#home" aria-label="Bengalis of Philadelphia home" onClick={closeMenu}><Wordmark /></a>
           <button className="menu-button" ref={menuButton} aria-expanded={menuOpen} aria-controls="navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? "Close" : "Menu"}</button>
           <nav id="navigation" className={menuOpen ? "navigation open" : "navigation"} aria-label="Main navigation">
-            <a href="#our-story" onClick={closeMenu}>Our story</a>
-            <a href="#gatherings" onClick={closeMenu}>Gatherings</a>
-            <a href="#get-involved" onClick={closeMenu}>Get involved</a>
+            <a href="#our-story" aria-current={activeSection === "our-story" ? "location" : undefined} onClick={closeMenu}>Our story</a>
+            <a href="#events" aria-current={activeSection === "events" ? "location" : undefined} onClick={closeMenu}>Events</a>
+            <a href="#gatherings" aria-current={activeSection === "gatherings" ? "location" : undefined} onClick={closeMenu}>Gatherings</a>
+            <a href="#get-involved" aria-current={activeSection === "get-involved" ? "location" : undefined} onClick={closeMenu}>Get involved</a>
           </nav>
           <a className="button header-join" href={links.heylo}>Join BOP <span aria-hidden="true">↗</span></a>
         </div>
@@ -39,9 +75,8 @@ export function App() {
             <p className="welcome-note">Bengalis & honorary Bengalis welcome.</p>
           </div>
           <div className="hero-collage">
-            <PhotoSpace loading="eager" className="hero-photo-main" image="BOP_Hike.png" alt="BOP members gathered on a wooded hiking trail" caption="Good company, out on the trail." />
-            <PhotoSpace loading="eager" className="hero-photo-small" image="BOP_Game_Night.png" alt="BOP members posing together at game night" caption="Game night. Good company." tone="rose" />
-            <div className="belonging-stamp"><span>There’s<br />room for<br />you here.</span><Flower /></div>
+            <PhotoSpace {...galleryPhotos[0]} onOpen={() => setPhotoIndex(0)} loading="eager" className="hero-photo-main" />
+            <PhotoSpace {...galleryPhotos[1]} onOpen={() => setPhotoIndex(1)} loading="eager" className="hero-photo-small" tone="rose" />
             <p className="collage-note">Making room for new memories.</p>
           </div>
         </section>
@@ -51,7 +86,7 @@ export function App() {
         </div>
 
         <section className="story wrap" id="our-story" aria-labelledby="story-heading">
-          <div className="story-image"><PhotoSpace image="BOP_Craft_Event.png" alt="BOP members gathered around a craft table at a community event" caption="Our people. Our city." tone="olive" /><span className="story-image-note">A place to find your people.</span></div>
+          <div className="story-image"><PhotoSpace {...galleryPhotos[2]} onOpen={() => setPhotoIndex(2)} tone="olive" /></div>
           <div className="story-copy">
             <p className="section-label">Meet Bengalis of Philadelphia</p>
             <h2 id="story-heading">There’s always<br />room for<br /><em>one more.</em></h2>
@@ -61,6 +96,8 @@ export function App() {
           </div>
         </section>
 
+        <Events />
+
         <section className="gatherings" id="gatherings" aria-labelledby="gatherings-heading">
           <div className="wrap">
             <div className="gatherings-heading">
@@ -68,9 +105,9 @@ export function App() {
               <div className="gatherings-note"><p>A few ideas to get us together.<br />Confirmed dates and details will be shared on Heylo.</p><a className="text-link" href={links.heylo}>Follow the plans on Heylo <span aria-hidden="true">↗</span></a></div>
             </div>
             <div className="gathering-grid">
-              <article className="gathering"><PhotoSpace image="BOP_Cat_Event.png" alt="BOP members spending time together with cats at a community outing" caption="For the conversations that keep going." tone="rose" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Cha & adda</h3><p>A cup of cha, something to snack on, and plenty to catch up about.</p></div></article>
-              <article className="gathering"><PhotoSpace image="BOP_Bok_Bar.png" alt="Friends at Bok Bar with the Philadelphia skyline at sunset" caption="For getting to know our city." tone="sand" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Out around Philly</h3><p>Riverside walks, museum days, and a few new favorite corners of the city.</p></div></article>
-              <article className="gathering"><PhotoSpace className="photo-game" image="BOP_Bhoot_Game.png" alt="Friends enjoying a BOP game night with a celebratory inset photo" caption="For a little friendly competition." tone="olive" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Games & good company</h3><p>Bring your competitive side, a game suggestion, or just yourself.</p></div></article>
+              <article className="gathering"><PhotoSpace {...galleryPhotos[3]} onOpen={() => setPhotoIndex(3)} tone="rose" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Cha & adda</h3><p>A cup of cha, something to snack on, and plenty to catch up about.</p></div></article>
+              <article className="gathering"><PhotoSpace {...galleryPhotos[4]} onOpen={() => setPhotoIndex(4)} tone="sand" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Out around Philly</h3><p>Riverside walks, museum days, and a few new favorite corners of the city.</p></div></article>
+              <article className="gathering"><PhotoSpace {...galleryPhotos[5]} onOpen={() => setPhotoIndex(5)} className="photo-game" tone="olive" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Games & good company</h3><p>Bring your competitive side, a game suggestion, or just yourself.</p></div></article>
             </div>
           </div>
         </section>
@@ -86,6 +123,7 @@ export function App() {
         </section>
       </main>
 
+      {photoIndex !== null && <PhotoGallery index={photoIndex} onChange={setPhotoIndex} onClose={() => setPhotoIndex(null)} />}
       <footer className="footer wrap"><div className="footer-top"><a className="brand" href="#home" aria-label="Bengalis of Philadelphia home"><Wordmark /></a><p>Rooted in Bangladesh.<br />Together in Philly.</p><div className="footer-links"><a href={links.instagram}>Instagram <span aria-hidden="true">↗</span></a><a href={links.email}>Say hello <span aria-hidden="true">↗</span></a></div></div><div className="footer-bottom"><span>Bengalis of Philadelphia</span><a href="#home">Back to top ↑</a></div></footer>
     </>
   );

@@ -59,3 +59,20 @@ using IntersectionObserver with cleanup and live reduced-motion preference handl
 Groups reset only after moving fully offscreen, with an 80px buffer to prevent edge flicker.
 Content already visible on load stays visible. Keyboard focus reveals pending content.
 Do not add looping motion or an animation dependency for these effects.
+
+## Nakshi kantha-inspired refinement
+
+Approved direction: retain the light background, English copy, community photos,
+and page structure. Deep green (#155442) leads headings; red (#b02e3c) highlights
+calls to action and thread accents. The community ribbon is light with paired
+running-stitch borders and red geometric floral rosettes. The story photo has a
+white Polaroid-style surround with a soft shadow and caption, without an overlay label; the closing invitation uses restrained thread borders.
+These are contemporary embroidery-inspired details, not reproductions of a
+specific historic textile. The hero’s circular belonging badge has been removed.
+
+## Photo gallery
+
+All six community images open a native modal dialog. Full photos use contain
+fitting, with captions, previous/next buttons, keyboard arrows, Escape dismissal,
+and horizontal touch swipes. Closing restores the opening button’s focus and
+page scrolling. Gallery metadata lives in `src/data/gallery.ts`.

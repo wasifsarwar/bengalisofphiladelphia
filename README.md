@@ -62,3 +62,8 @@ assets, bundled tools, installed skills, dependencies, build output, and critiqu
 archives via `.serena/project.yml`. Its generated cache stays untracked. Refresh
 it with `serena project index .` using the pinned Serena installation in
 `.codex/config.toml`; use symbol lookups for code and `rg` for CSS and copy.
+
+## Monthly events
+
+Edit `src/data/events.ts`; see `docs/events.md` for fields and publishing.
+Run date/filter regressions with `node --experimental-strip-types --test tests/events.test.mjs`.
