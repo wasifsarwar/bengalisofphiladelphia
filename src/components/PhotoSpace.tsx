@@ -1,3 +1,4 @@
+import { galleryTransition } from "../utils/galleryTransition";
 import { imageUrl } from "../data/content";
 import { Flower } from "./Flower";
 
@@ -6,7 +7,7 @@ export function PhotoSpace({ className = "", caption, tone = "sand", image, alt,
   return (
     <figure className={`photo-space photo-${tone} ${className}`}>
       <div className="photo-surface" role={image ? undefined : "img"} aria-label={image ? undefined : `Photo placeholder: ${caption}`}>
-        {image ? <><img src={imageUrl(`community/${image}`)} alt={alt ?? caption} loading={loading} decoding="async" />{onOpen && <button className="photo-open" type="button" onClick={onOpen} aria-label={`View photo: ${caption}`} />}</> : <>
+        {image ? <><img src={imageUrl(`community/${image}`)} alt={alt ?? caption} loading={loading} decoding="async" />{onOpen && <button className="photo-open" type="button" onClick={event => galleryTransition(onOpen, event.currentTarget)} aria-label={`View photo: ${caption}`} />}</> : <>
         <span className="photo-corner corner-tl" aria-hidden="true" />
         <span className="photo-corner corner-tr" aria-hidden="true" />
         <span className="photo-corner corner-bl" aria-hidden="true" />

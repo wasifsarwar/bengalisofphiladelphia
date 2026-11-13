@@ -18,3 +18,9 @@ cwd = "/Users/wasifsiddique/Desktop/BOP/bop-site"
 startup_timeout_sec = 30
 [mcp_servers.memory.env]
 MEMORY_FILE_PATH = "/Users/wasifsiddique/Desktop/BOP/bop-site/.local/memory.jsonl"
+
+[mcp_servers.playwright]
+command = "/opt/homebrew/bin/node"
+args = ["/Users/wasifsiddique/Desktop/BOP/bop-site/.tools/mcp/node_modules/@playwright/mcp/cli.js", "--headless", "--isolated", "--browser", "chrome", "--output-dir", "/Users/wasifsiddique/Desktop/BOP/bop-site/.local/playwright"]
+cwd = "/Users/wasifsiddique/Desktop/BOP/bop-site"
+startup_timeout_sec = 60

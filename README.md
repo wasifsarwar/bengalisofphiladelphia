@@ -67,3 +67,5 @@ it with `serena project index .` using the pinned Serena installation in
 
 Edit `src/data/events.ts`; see `docs/events.md` for fields and publishing.
 Run date/filter regressions with `node --experimental-strip-types --test tests/events.test.mjs`.
+
+Gallery transition and event regression checks: `node --experimental-strip-types --test tests/*.test.mjs`.

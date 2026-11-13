@@ -1,13 +1,13 @@
 # UI development tools and context budget
 
-Updated November 10, 2026.
+Updated November 13, 2026.
 
 ## Available now
 
 - Use the installed `.agents/skills/frontend-design/SKILL.md` for substantial
   design work. Preserve the approved homepage and use its plan/build/critique loop.
 - Use the connected browser tool for focused layout and interaction checks.
-  A second browser automation MCP is unnecessary for this workflow.
+  When the connected browser host is unavailable, use the user-requested Playwright MCP installation described below.
 - Figma tools are available when the user supplies or requests a Figma design.
   Routine CSS edits do not need Figma calls.
 
@@ -62,3 +62,25 @@ Use `ponytail-audit` for repo quality; use `impeccable critique` for usability.
 Impeccable's launcher lives at `~/.codex/skills/impeccable/scripts/impeccable`.
 Its `context`, `detect`, and `critique-storage` commands support the critique
 workflow; critique itself is an agent playbook, not a standalone shell report.
+
+## Playwright MCP (installed November 13, 2026)
+
+Microsoft's `@playwright/mcp` 0.0.85 is pinned in `.tools/mcp/package.json` and
+its lockfile. `.codex/config.toml` registers it as `playwright`, using the local
+Node CLI, installed Chrome, headless mode, an isolated in-memory browser profile,
+and `.local/playwright` for output. It does not use the user's signed-in profile.
+Open `bop-site` as the Codex project and reload the session to discover the new
+native tools. Current-session operation was verified through the installed MCP
+SDK's stdio client, calling the server's actual browser tools (not plain Playwright
+masquerading as MCP). The browser-run-code tool is named `browser_run_code_unsafe`
+in this pinned release; reserve it for authorized local-site inspection.
+
+Inspection evidence and screenshots: `.local/playwright/` (untracked).
+Findings: `docs/browser-inspection-2026-11-13.md`.
+
+No measured animation-frame-rate, real-phone touch test, or cross-browser claim
+is made. The headless Chrome viewport tests are desktop/mobile emulation only.
+
+Sources:
+- https://github.com/microsoft/playwright-mcp
+- https://developers.openai.com/codex/mcp/

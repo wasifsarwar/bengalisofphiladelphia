@@ -1,3 +1,4 @@
+import { galleryTransition } from "../utils/galleryTransition";
 import { Flower } from "./Flower";
 import { PhotoGallery } from "./PhotoGallery";
 import { useEffect, useRef, useState } from "react";
@@ -62,7 +63,7 @@ export function Events() {
     {visible.length ? <>
       <ul ref={track} className={`events-track${visible.length <= 3 ? " events-centered" : ""}`} aria-label={`${monthLabel(month)} events`} tabIndex={0}>
         {visible.map(event => <li className="event-card" key={event.id}>
-          {event.flyer && <button type="button" className="event-flyer-open" onClick={() => setFlyerIndex(flyers.findIndex(photo => photo.image === event.flyer))} aria-label={`Open flyer: ${event.title}`}><img className="event-flyer" src={imageUrl(`events/${event.flyer}`)} alt={`${event.title} flyer`} loading="lazy" /></button>}
+          {event.flyer && <button type="button" className="event-flyer-open" onClick={click => galleryTransition(() => setFlyerIndex(flyers.findIndex(photo => photo.image === event.flyer)), click.currentTarget)} aria-label={`Open flyer: ${event.title}`}><img className="event-flyer" src={imageUrl(`events/${event.flyer}`)} alt={`${event.title} flyer`} loading="lazy" /></button>}
           <div className="event-ticket"><span className="event-state">{past ? "From the album" : "Coming up"}</span><time dateTime={event.date}>{new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", weekday: "short", timeZone: "UTC" }).format(new Date(`${event.date}T12:00:00Z`))}</time></div>
           <h3>{event.title}</h3><p className="event-details">{event.time}<br />{event.location}</p>
           <p>{event.description}</p>{event.url && <a className="text-link" href={event.url} aria-label={`${past ? "View details" : "Details and RSVP"}: ${event.title}`}>{past ? "View details" : "Details & RSVP"} <span aria-hidden="true">↗</span></a>}

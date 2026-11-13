@@ -88,9 +88,8 @@ available throughout. No additional library or continuous animation is used.
 
 ## Interactive album pass
 
-The hero's Arrange the prints button toggles a straightened layout and restores
-its original scatter, via a native pressed-state button usable with touch and
-keyboard. No custom drag behavior on the hero competes with opening photos.
+The hero retains its original scattered Polaroid layout. The arrangement control
+and its state-dependent transforms have been removed. Photos still open the gallery.
 
 The shared viewer has 100–300% zoom in 50% steps and Fit photo reset. When zoomed,
 scrollbars, native touch panning, keyboard scrolling in the focused image area,
@@ -105,3 +104,43 @@ images, local event data and established green/red/light palette are retained.
 Build and event date tests passed; browser host unavailable during this pass.
 Desktop/mobile render, pan gestures, zoom bounds in practice and reduced-motion
 presentation still require browser verification before calling this polished.
+
+### Shared-photo and stitch transitions
+
+Community photos and flyers share a photo-to-dialog view transition where the
+browser supports it. The triggering image is named only for the snapshot;
+cleanup restores its original styling after completion or cancellation. Closing
+returns to the opening photo. Unsupported/reduced-motion paths update directly.
+The dialog is opened in a layout effect so its image is present for the snapshot.
+The existing gallery fade remains the fallback. Focus and body-scroll restoration
+remain part of the dialog lifecycle.
+
+The story-to-events divider draws its two green thread lines inward, followed by
+the red flower. It shares the existing scroll-entry/reset observers, with a static
+reduced-motion path and no always-running animation. Functional transition tests
+cover supported, unsupported, reduced-motion, failure, and cleanup paths; browser
+smoothness/desktop/mobile visual verification is pending host availability.
+
+## Cleanup following browser inspection
+
+Removed the gathering preference picker, selection state, email-prefill response,
+and picked-card styles. The gathering cards remain directly below their heading.
+Story reveals move vertically at narrow widths to avoid horizontal overflow.
+The community ribbon uses smaller type/spacing at 360px and below.
+A green/red BOP SVG favicon is served through Vite's base-aware public asset URL.
+Playwright MCP verified no page overflow at 320, 390, 768, and 1280px, the picker
+absent at each width, and the favicon response at its correct path (HTTP 200).
+
+## Etched signature moments
+
+All Polaroid captions use Cormorant Garamond italic at a responsive caption size,
+including “Our people. Our city.” The story caption has no tracing or underline.
+
+The closing BOP flourish uses vector outlines from the locally served Patrick
+Hand font. `src/components/EtchedSignature.tsx` animates the warm gold trace as
+cream lettering settles on red. It runs once on entry without replay controls;
+reduced motion shows static lettering. Accessible text accompanies the decorative
+SVG outlines. The generated paths live in `src/data/signatures.ts`.
+
+The closing invitation omits the former connection tagline; the floral motif and
+nakshi kantha thread details remain.

@@ -8,7 +8,7 @@ export function useScrollReveal(root: RefObject<HTMLElement | null>) {
     if (!container || !("IntersectionObserver" in window)) return;
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const targets = Array.from(container.querySelectorAll<HTMLElement>(
-      ".story-image, .story-copy, .gatherings-heading, .gathering, .involvement-copy, .involvement-actions, .join-inner",
+      ".stitched-divider, .story-image, .story-copy, .gatherings-heading, .gathering, .involvement-copy, .involvement-actions, .join-inner",
     ));
     let observer: IntersectionObserver | undefined;
     let exitObserver: IntersectionObserver | undefined;

@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { galleryTransition } from "../utils/galleryTransition";
+import { useLayoutEffect, useRef, useState } from "react";
 import { galleryPhotos } from "../data/gallery";
 import { imageUrl } from "../data/content";
 
@@ -16,6 +17,12 @@ export function PhotoGallery({ index, onChange, onClose, photos = galleryPhotos,
     viewport.current?.scrollTo({ left: 0, top: 0, behavior: "instant" });
     onChange(next);
   };
+  const closing = useRef(false);
+  const close = () => {
+    if (closing.current) return;
+    closing.current = true;
+    galleryTransition(onClose, opener.current, true);
+  };
   const photo = photos[index];
   const move = (step: number) => {
     if (photos.length < 2) return;
@@ -24,7 +31,7 @@ export function PhotoGallery({ index, onChange, onClose, photos = galleryPhotos,
     viewport.current?.scrollTo({ left: 0, top: 0, behavior: "instant" });
     onChange((index + step + photos.length) % photos.length);
   };
-  useEffect(() => {
+  useLayoutEffect(() => {
     const previousOverflow = document.body.style.overflow;
     dialog.current?.showModal();
     document.body.style.overflow = "hidden";
@@ -35,14 +42,14 @@ export function PhotoGallery({ index, onChange, onClose, photos = galleryPhotos,
     };
   }, []);
   return (
-    <dialog ref={dialog} className="photo-gallery" aria-label={title} onCancel={onClose}
-      onClick={event => { if (event.target === event.currentTarget) onClose(); }}
+    <dialog ref={dialog} className="photo-gallery" aria-label={title} onCancel={event => { event.preventDefault(); close(); }}
+      onClick={event => { if (event.target === event.currentTarget) close(); }}
       onKeyDown={event => {
         if (zoom === 1 && event.key === "ArrowRight") { event.preventDefault(); move(1); }
         if (zoom === 1 && event.key === "ArrowLeft") { event.preventDefault(); move(-1); }
       }}>
       <div className="gallery-panel">
-        <div className="gallery-top"><span>{title}</span><button type="button" onClick={onClose} autoFocus>Close ×</button></div>
+        <div className="gallery-top"><span>{title}</span><button type="button" onClick={close} autoFocus>Close ×</button></div>
         <div className="gallery-tools" role="group" aria-label="Photo zoom">
           <button type="button" disabled={zoom <= 1} aria-label="Zoom out" onClick={() => setZoom(Math.max(1, zoom - .5))}>−</button>
           <span role="status">{Math.round(zoom * 100)}%</span>

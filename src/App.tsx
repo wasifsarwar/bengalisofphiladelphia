@@ -1,3 +1,4 @@
+import { EtchedSignature } from "./components/EtchedSignature";
 import { useEffect, useRef, useState } from "react";
 import { useScrollReveal } from "./hooks/useScrollReveal";
 import { links } from "./data/content";
@@ -9,9 +10,6 @@ import { Events } from "./components/Events";
 import { Wordmark } from "./components/Wordmark";
 
 export function App() {
-  const [photosArranged, setPhotosArranged] = useState(false);
-  const [plan, setPlan] = useState<number | null>(null);
-  const planNames = ["Cha & adda", "Out around Philly", "Games & good company"];
   const [photoIndex, setPhotoIndex] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -78,10 +76,9 @@ export function App() {
             <p className="join-context">Find community plans and gathering details on Heylo.</p>
             <p className="welcome-note">Bengalis & honorary Bengalis welcome.</p>
           </div>
-          <div className="hero-collage" data-arranged={photosArranged}>
+          <div className="hero-collage">
             <PhotoSpace {...galleryPhotos[0]} onOpen={() => setPhotoIndex(0)} loading="eager" className="hero-photo-main" />
             <PhotoSpace {...galleryPhotos[1]} onOpen={() => setPhotoIndex(1)} loading="eager" className="hero-photo-small" tone="rose" />
-            <button type="button" className="arrange-photos" aria-pressed={photosArranged} onClick={() => setPhotosArranged(!photosArranged)}>{photosArranged ? "Scatter the prints" : "Arrange the prints"} <span aria-hidden="true">↔</span></button>
           </div>
         </section>
 
@@ -108,19 +105,10 @@ export function App() {
               <div><p className="section-label">Things we’re planning</p><h2 id="gatherings-heading">Let’s make <em>a plan.</em></h2></div>
 
             </div>
-            <div className="plan-picker">
-              <div className="plan-options" role="group" aria-label="Pick your kind of gathering">
-                <span>What sounds like you?</span>
-                {planNames.map((name, index) => <button type="button" key={name} aria-pressed={plan === index} onClick={() => setPlan(plan === index ? null : index)}>{name}</button>)}
-              </div>
-              <div className="plan-response" aria-live="polite" aria-atomic="true">
-                {plan === null ? <p>Choose a plan to highlight it.</p> : <p><Flower /> Your pick: {planNames[plan]}. <a href={`${links.email}?subject=${encodeURIComponent(`Gathering idea: ${planNames[plan]}`)}&body=${encodeURIComponent(`Hi BOP! I’d love to suggest a ${planNames[plan]} gathering.\n\nHere’s my idea: `)}`}>Suggest this by email <span aria-hidden="true">↗</span></a></p>}
-              </div>
-            </div>
             <div className="gathering-grid">
-              <article className="gathering" data-picked={plan === 0}><PhotoSpace {...galleryPhotos[3]} onOpen={() => setPhotoIndex(3)} tone="rose" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Cha & adda</h3><p>A cup of cha, something to snack on, and plenty to catch up about.</p></div></article>
-              <article className="gathering" data-picked={plan === 1}><PhotoSpace {...galleryPhotos[4]} onOpen={() => setPhotoIndex(4)} tone="sand" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Out around Philly</h3><p>Riverside walks, museum days, and a few new favorite corners of the city.</p></div></article>
-              <article className="gathering" data-picked={plan === 2}><PhotoSpace {...galleryPhotos[5]} onOpen={() => setPhotoIndex(5)} className="photo-game" tone="olive" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Games & good company</h3><p>Bring your competitive side, a game suggestion, or just yourself.</p></div></article>
+              <article className="gathering"><PhotoSpace {...galleryPhotos[3]} onOpen={() => setPhotoIndex(3)} tone="rose" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Cha & adda</h3><p>A cup of cha, something to snack on, and plenty to catch up about.</p></div></article>
+              <article className="gathering"><PhotoSpace {...galleryPhotos[4]} onOpen={() => setPhotoIndex(4)} tone="sand" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Out around Philly</h3><p>Riverside walks, museum days, and a few new favorite corners of the city.</p></div></article>
+              <article className="gathering"><PhotoSpace {...galleryPhotos[5]} onOpen={() => setPhotoIndex(5)} className="photo-game" tone="olive" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Games & good company</h3><p>Bring your competitive side, a game suggestion, or just yourself.</p></div></article>
             </div>
             <div className="gatherings-note"><p>A few ideas to get us together.<br />Confirmed dates and details will be shared on Heylo.</p><a className="text-link" href={links.heylo}>Follow the plans on Heylo <span aria-hidden="true">↗</span></a></div>
           </div>
@@ -133,7 +121,7 @@ export function App() {
         </section>
 
         <section className="join" aria-labelledby="join-heading">
-          <div className="wrap join-inner"><Flower /><p>A little connection goes a long way.</p><h2 id="join-heading">Come for the cha.<br /><em>Stay for the adda.</em></h2><a className="button button-cream" href={links.heylo}>Join BOP on Heylo <span aria-hidden="true">↗</span></a><p className="join-note">Find community plans and gathering details on Heylo.</p></div>
+          <div className="wrap join-inner"><EtchedSignature variant="closing" label="bop." /><Flower /><h2 id="join-heading">Come for the cha.<br /><em>Stay for the adda.</em></h2><a className="button button-cream" href={links.heylo}>Join BOP on Heylo <span aria-hidden="true">↗</span></a><p className="join-note">Find community plans and gathering details on Heylo.</p></div>
         </section>
       </main>
 
