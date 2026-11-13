@@ -16,3 +16,8 @@ test('handles leap years and year rollover', () => {
   assert.equal(upcomingEvents([event('leap','2028-02-29')],'2028-02-29').length,1);
   assert.equal(upcomingEvents([event('expired','2026-12-31')],'2027-01-01').length,0);
 });
+test('past view includes archived events without RSVP links and excludes today', () => {
+  const old = { ...event('pumpkin','2026-10-22'), url: undefined };
+  assert.deepEqual(upcomingEvents([old,event('today','2026-11-12')], '2026-11-12', true).map(e=>e.id), ['pumpkin']);
+  assert.equal(upcomingEvents([old], '2026-11-12').length, 0);
+});

@@ -428,3 +428,57 @@ em { font-weight: 500; }
   .events-track { scroll-padding-inline: 4px; }
   .events-empty { padding: 24px 12px; }
 }
+
+.event-flyer { display: block; width: 100%; height: auto; }
+.events-controls[aria-label="Event history"] { justify-content: flex-start; }
+.events-controls[aria-label="Event history"] button { width: auto; border-radius: 3px; padding-inline: 16px; }
+.events-controls button[aria-pressed="true"] { background: var(--green); color: var(--cream); }
+/* Event cards borrow the running-stitch border of nakshi kantha. */
+.event-card { position: relative; border: 1px dashed var(--red); box-shadow: none; padding: 28px; }
+.event-card::before { content: ""; position: absolute; inset: 6px; border: 1px dashed #15544288; pointer-events: none; }
+.event-flyer-open { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
+.photo-gallery button:disabled { opacity: .35; cursor: default; background: var(--cream); color: var(--green); }
+
+/* Event-history controls share one quiet, clearly selected surface. */
+.events-controls.event-history-switch { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid #15544255; border-radius: 6px; margin-top: 24px; }
+.events-controls.event-history-switch button { border: 0; min-height: 44px; padding-inline: 18px; }
+.events-controls button:disabled, .events-month select:disabled { opacity: .4; cursor: default; }
+.events-controls button:not(:disabled):hover { background: var(--green); color: var(--cream); }
+.events-controls button[aria-pressed="true"] { background: var(--green); color: var(--cream); }
+.gallery-bottom p { text-wrap: balance; }
+
+/* A shared thread-and-flower vocabulary marks the story-to-events transition. */
+.story { padding-bottom: 64px; }
+.events { padding-top: 0; }
+.stitched-divider { display: flex; align-items: center; gap: 20px; margin-bottom: 52px; }
+.stitched-divider > span { flex: 1; border-top: 1px dashed #15544299; }
+.stitched-divider > svg { width: 34px; height: 34px; color: var(--red); flex-shrink: 0; }
+.events-heading { align-items: center; }
+.events-month select { min-width: 200px; }
+.events-track { scrollbar-width: thin; scrollbar-color: #15544288 transparent; }
+.event-flyer-open { overflow: hidden; }
+.event-flyer-open:focus-visible { outline-offset: 5px; }
+.event-card:focus-within { border-color: var(--green); }
+.events-controls button, .events-month select { transition: background 180ms, color 180ms, border-color 180ms; }
+.text-link { min-height: 44px; align-items: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .event-flyer { transition: scale 350ms cubic-bezier(.16, 1, .3, 1); }
+  .event-card { animation: event-arrive 350ms cubic-bezier(.16, 1, .3, 1) both; }
+  @media (hover: hover) and (pointer: fine) {
+    .event-flyer-open:hover .event-flyer { scale: 1.025; }
+    .event-card:hover { border-color: var(--green); }
+  }
+}
+@keyframes event-arrive { from { opacity: .5; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
+@media (max-width: 850px) {
+  .story { padding-bottom: 48px; }
+  .stitched-divider { margin-bottom: 40px; }
+}
+@media (max-width: 600px) {
+  .story { padding-bottom: 36px; }
+  .stitched-divider { gap: 14px; margin-bottom: 32px; }
+  .stitched-divider > svg { width: 28px; height: 28px; }
+  .events-heading p, .event-card p { font-size: 15px; }
+  .events-month, .events-count { font-size: 14px; }
+  .welcome-note, .quiet-link { font-size: 12px; }
+}

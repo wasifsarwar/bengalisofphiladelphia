@@ -77,7 +77,6 @@ export function App() {
           <div className="hero-collage">
             <PhotoSpace {...galleryPhotos[0]} onOpen={() => setPhotoIndex(0)} loading="eager" className="hero-photo-main" />
             <PhotoSpace {...galleryPhotos[1]} onOpen={() => setPhotoIndex(1)} loading="eager" className="hero-photo-small" tone="rose" />
-            <p className="collage-note">Making room for new memories.</p>
           </div>
         </section>
 

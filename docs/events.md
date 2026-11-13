@@ -34,3 +34,13 @@ Save the file for local preview. Run `npm run build` and
 `node --experimental-strip-types --test tests/events.test.mjs`, then commit/push
 and verify the GitHub Pages deployment to publish changes. Editing the local
 file does not update the public website by itself. No CMS/feed integration exists.
+
+## Past events and flyers
+
+Past events remain in the data file and appear under the Past events switch,
+with a month selector defaulting to the latest archived month. Upcoming remains
+the default view. `url` is optional when no verified event link is available.
+Past events with a link show View details instead of an RSVP invitation.
+Add `flyer: "filename.png"` for an image in `public/images/events/`; the full
+uncropped flyer appears in the card and opens in the in-page gallery, with Escape/Close dismissal and navigation between
+flyers in the selected month. Focus returns to the flyer button on close.

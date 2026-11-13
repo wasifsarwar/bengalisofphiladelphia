@@ -5,8 +5,17 @@ export type CommunityEvent = {
   time: string; // Visitor-facing time, e.g. "6–8 PM ET".
   location: string;
   description: string;
-  url: string; // HTTPS event details or RSVP link.
+  flyer?: string; // Filename under public/images/events/.
+  url?: string; // HTTPS event details or RSVP link.
 };
 
 // Add confirmed events here. See docs/events.md for the monthly editing workflow.
-export const events: CommunityEvent[] = [{"id": "11-0", "title": "Layout test 1 (not a real event)", "date": "2026-11-20", "time": "Test time", "location": "Test location", "description": "Temporary layout fixture. Not a real BOP event.", "url": "https://example.com"}, {"id": "11-1", "title": "Layout test 2 (not a real event)", "date": "2026-11-21", "time": "Test time", "location": "Test location", "description": "Temporary layout fixture. Not a real BOP event.", "url": "https://example.com"}, {"id": "12-0", "title": "Layout test 1 (not a real event)", "date": "2026-12-20", "time": "Test time", "location": "Test location", "description": "Temporary layout fixture. Not a real BOP event.", "url": "https://example.com"}, {"id": "12-1", "title": "Layout test 2 (not a real event)", "date": "2026-12-21", "time": "Test time", "location": "Test location", "description": "Temporary layout fixture. Not a real BOP event.", "url": "https://example.com"}, {"id": "12-2", "title": "Layout test 3 (not a real event)", "date": "2026-12-22", "time": "Test time", "location": "Test location", "description": "Temporary layout fixture. Not a real BOP event.", "url": "https://example.com"}, {"id": "01-0", "title": "Layout test 1 (not a real event)", "date": "2027-01-20", "time": "Test time", "location": "Test location", "description": "Temporary layout fixture. Not a real BOP event.", "url": "https://example.com"}, {"id": "01-1", "title": "Layout test 2 (not a real event)", "date": "2027-01-21", "time": "Test time", "location": "Test location", "description": "Temporary layout fixture. Not a real BOP event.", "url": "https://example.com"}, {"id": "01-2", "title": "Layout test 3 (not a real event)", "date": "2027-01-22", "time": "Test time", "location": "Test location", "description": "Temporary layout fixture. Not a real BOP event.", "url": "https://example.com"}, {"id": "01-3", "title": "Layout test 4 (not a real event)", "date": "2027-01-23", "time": "Test time", "location": "Test location", "description": "Temporary layout fixture. Not a real BOP event.", "url": "https://example.com"}, {"id": "01-4", "title": "Layout test 5 (not a real event)", "date": "2027-01-24", "time": "Test time", "location": "Test location", "description": "Temporary layout fixture. Not a real BOP event.", "url": "https://example.com"}];
+export const events: CommunityEvent[] = [{
+  id: "pumpkin-carving-2026-10-22",
+  title: "Pumpkin carving",
+  date: "2026-10-22",
+  time: "5:30–8 PM ET",
+  location: "Morgan’s Pier (Fall Fest)",
+  description: "Pumpkin carving at Morgan’s Pier Fall Fest. RSVP was required.",
+  flyer: "BOP_Pumpkin_Carving.png",
+}];
