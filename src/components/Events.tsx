@@ -1,6 +1,6 @@
 import { galleryTransition } from "../utils/galleryTransition";
 import { Flower } from "./Flower";
-import { PhotoGallery } from "./PhotoGallery";
+import { PhotoGallery } from "./LazyPhotoGallery";
 import { useEffect, useRef, useState } from "react";
 import { events } from "../data/events";
 import { philadelphiaDate, upcomingEvents } from "../data/eventDates";

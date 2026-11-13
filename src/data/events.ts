@@ -16,6 +16,6 @@ export const events: CommunityEvent[] = [{
   date: "2026-10-22",
   time: "5:30–8 PM ET",
   location: "Morgan’s Pier (Fall Fest)",
-  description: "Pumpkin carving at Morgan’s Pier Fall Fest. RSVP was required.",
+  description: "Pumpkin carving at Morgan’s Pier Fall Fest. RSVP is required.",
   flyer: "BOP_Pumpkin_Carving.png",
 }];

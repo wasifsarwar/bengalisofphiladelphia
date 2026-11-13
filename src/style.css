@@ -1,4 +1,4 @@
-@font-face { font-family: "Patrick Hand"; src: url("/fonts/patrick-hand-regular.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
+@font-face { font-family: "Patrick Hand"; src: url("/fonts/patrick-hand-latin.woff2") format("woff2"); font-style: normal; font-weight: 400; font-display: swap; }
 :root {
   font-family: "DM Sans", sans-serif;
   color: #155442;
@@ -696,3 +696,25 @@ em { font-weight: 500; }
 .hero-print-stack .hero-photo-small { transform: rotate(-9deg); z-index: 2; }
 .hero-print-stack .photo-open { cursor: pointer; }
 .hero-print-stack .photo-space:has(.photo-open:focus-visible) { outline: 2px solid var(--green); outline-offset: 5px; }
+
+/* Hero rhythm: a generous invitation, followed by one compact supporting note. */
+.hero-copy { min-width: 0; }
+.hero h1 { line-height: .9; letter-spacing: -.035em; }
+.hero .location-note { margin-bottom: 28px; }
+.hero-actions { margin-top: 40px; gap: 28px; row-gap: 16px; flex-wrap: wrap; }
+.hero-actions .button { min-height: 52px; }
+.hero-actions .quiet-link { min-height: 44px; }
+.hero-copy .join-context { margin-top: 20px; max-width: 42ch; font-size: 13px; line-height: 1.65; }
+.hero-copy .welcome-note { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 12px; line-height: 1.6; }
+.welcome-note > svg { width: 18px; height: 18px; flex: 0 0 18px; color: var(--red); }
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .welcome-note > svg { transition: rotate 550ms cubic-bezier(.16, 1, .3, 1); }
+  .hero-copy:has(.hero-actions .button:hover) .welcome-note > svg { rotate: 45deg; }
+}
+@media (max-width: 600px) {
+  .hero .location-note { margin-bottom: 24px; }
+  .hero-actions { margin-top: 32px; column-gap: 24px; }
+  .hero-copy .join-context { margin-top: 16px; font-size: 12px; }
+  .hero-copy .welcome-note { font-size: 11px; }
+  .hero-collage { margin-top: 32px; }
+}

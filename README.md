@@ -69,3 +69,11 @@ Edit `src/data/events.ts`; see `docs/events.md` for fields and publishing.
 Run date/filter regressions with `node --experimental-strip-types --test tests/events.test.mjs`.
 
 Gallery transition and event regression checks: `node --experimental-strip-types --test tests/*.test.mjs`.
+
+Photo previews are generated with `uv run scripts/optimize-assets.py` after
+adding or changing community PNGs, the source logo, or Patrick Hand font. This
+creates responsive WebP previews and a Latin WOFF2 font, preserving all originals.
+Unprocessed photos fall back to their original file. The photo viewer loads the
+original images; the homepage chooses previews based on viewport and pixel density.
+Validation: `npm run build` and
+`node --experimental-strip-types --test tests/*.test.mjs`.

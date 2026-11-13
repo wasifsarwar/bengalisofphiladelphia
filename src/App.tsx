@@ -5,7 +5,7 @@ import { useScrollReveal } from "./hooks/useScrollReveal";
 import { links } from "./data/content";
 import { Flower } from "./components/Flower";
 import { PhotoSpace } from "./components/PhotoSpace";
-import { PhotoGallery } from "./components/PhotoGallery";
+import { PhotoGallery } from "./components/LazyPhotoGallery";
 import { galleryPhotos } from "./data/gallery";
 import { Events } from "./components/Events";
 import { Wordmark } from "./components/Wordmark";
@@ -19,15 +19,19 @@ export function App() {
     const sections = ["our-story", "events", "gatherings", "get-involved"]
       .map(id => document.getElementById(id)).filter((node): node is HTMLElement => !!node);
     let frame = 0;
+    let lastHeaderHeight = -1;
     const update = () => {
       frame = 0;
       const height = header.current?.getBoundingClientRect().height ?? 100;
-      document.documentElement.style.setProperty("--header-height", `${height}px`);
       const readingLine = height + 60;
       const current = sections.find(section => {
         const bounds = section.getBoundingClientRect();
         return bounds.top <= readingLine && bounds.bottom > readingLine;
       });
+      if (height !== lastHeaderHeight) {
+        document.documentElement.style.setProperty("--header-height", `${height}px`);
+        lastHeaderHeight = height;
+      }
       setActiveSection(current?.id ?? "");
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
@@ -72,10 +76,9 @@ export function App() {
           <div className="hero-copy">
             <p className="location-note"><span aria-hidden="true">✳</span> A Bengali community in Philadelphia</p>
             <h1 id="hero-heading">A little<br />Bangladesh.<br /><em><span>A lot of</span><span>Philadelphia.</span></em></h1>
-            <p className="hero-description">Familiar roots. New friendships. A place to meet,<br className="desktop-break" /> share some cha, and make this city feel like home.</p>
             <div className="hero-actions"><a className="button" href={links.heylo}>Join BOP on Heylo <span aria-hidden="true">↗</span></a><a className="quiet-link" href="#our-story">Get to know us <span aria-hidden="true">↓</span></a></div>
             <p className="join-context">Find community plans and gathering details on Heylo.</p>
-            <p className="welcome-note">Bengalis & honorary Bengalis welcome.</p>
+            <p className="welcome-note"><Flower />Bengalis & honorary Bengalis welcome.</p>
           </div>
           <HeroPrints />
         </section>
