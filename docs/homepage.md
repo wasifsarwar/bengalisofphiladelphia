@@ -76,3 +76,32 @@ All six community images open a native modal dialog. Full photos use contain
 fitting, with captions, previous/next buttons, keyboard arrows, Escape dismissal,
 and horizontal touch swipes. Closing restores the opening button’s focus and
 page scrolling. Gallery metadata lives in `src/data/gallery.ts`.
+
+### Decision feedback motion
+
+Event-history selection moves a shared green selection surface over 240 ms.
+Headings/empty states confirm a view change with a brief fade. Gallery opening
+uses a 260 ms print-settling transition and a 180 ms backdrop fade. Loaded photos
+enter by 16px in the browsing direction over 220 ms. Single-photo viewers do not
+advance. Reduced-motion users receive immediate state changes; controls remain
+available throughout. No additional library or continuous animation is used.
+
+## Interactive album pass
+
+The hero's Arrange the prints button toggles a straightened layout and restores
+its original scatter, via a native pressed-state button usable with touch and
+keyboard. No custom drag behavior on the hero competes with opening photos.
+
+The shared viewer has 100–300% zoom in 50% steps and Fit photo reset. When zoomed,
+scrollbars, native touch panning, keyboard scrolling in the focused image area,
+and mouse drag pan explore details. Photo navigation returns to fit mode. Arrows
+and swipes change photos only at fit size. A thumbnail filmstrip offers direct
+selection, with visible pressed state. Single-flyer galleries omit thumbnails.
+
+Event dates use a ticket-like date block; past events say From the album and
+upcoming events say Coming up. Existing view-switch feedback remains. Original
+images, local event data and established green/red/light palette are retained.
+
+Build and event date tests passed; browser host unavailable during this pass.
+Desktop/mobile render, pan gestures, zoom bounds in practice and reduced-motion
+presentation still require browser verification before calling this polished.

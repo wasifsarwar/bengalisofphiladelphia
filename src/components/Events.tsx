@@ -45,22 +45,25 @@ export function Events() {
   return <section className="events wrap" id="events" aria-labelledby="events-heading">
     <div className="stitched-divider" aria-hidden="true"><span /><Flower /><span /></div>
     <div className="events-heading">
-      <div><h2 id="events-heading">{past ? "Past events" : "Upcoming events"}</h2><p>{past ? "A look back at time spent together." : "Make time for good company."}</p></div>
+      <div key={`heading-${past}`} className="events-view-heading"><h2 id="events-heading">{past ? "Past events" : "Upcoming events"}</h2><p>{past ? "A look back at time spent together." : "Make time for good company."}</p></div>
+
+    </div>
+    <div className="events-toolbar">
+    <div className="events-controls event-history-switch" data-view={past ? "past" : "upcoming"} role="group" aria-label="Event history">
+      <button type="button" aria-pressed={!past} onClick={() => { setPast(false); setChosenMonth(""); }}>Upcoming</button>
+      <button type="button" aria-pressed={past} onClick={() => { setPast(true); setChosenMonth(""); }}>Past events</button>
+    </div>
       <label className="events-month"><span>Month</span><select disabled={!months.length} aria-label="Month" value={month} onChange={event => { setChosenMonth(event.target.value); track.current?.scrollTo({ left: 0, behavior: "instant" }); }}>
         {!months.length && <option value={month}>{monthLabel(month)}</option>}
         {months.map(value => <option key={value} value={value}>{monthLabel(value)}</option>)}
       </select></label>
-    </div>
-    <div className="events-controls event-history-switch" role="group" aria-label="Event history">
-      <button type="button" aria-pressed={!past} onClick={() => { setPast(false); setChosenMonth(""); }}>Upcoming</button>
-      <button type="button" aria-pressed={past} onClick={() => { setPast(true); setChosenMonth(""); }}>Past events</button>
     </div>
     <p className="events-count" role="status">{visible.length ? `${visible.length} ${past ? "past" : "upcoming"} ${visible.length === 1 ? "event" : "events"} in ${monthLabel(month)}` : `No ${past ? "past" : "upcoming"} events listed for ${monthLabel(month)}.`}</p>
     {visible.length ? <>
       <ul ref={track} className={`events-track${visible.length <= 3 ? " events-centered" : ""}`} aria-label={`${monthLabel(month)} events`} tabIndex={0}>
         {visible.map(event => <li className="event-card" key={event.id}>
           {event.flyer && <button type="button" className="event-flyer-open" onClick={() => setFlyerIndex(flyers.findIndex(photo => photo.image === event.flyer))} aria-label={`Open flyer: ${event.title}`}><img className="event-flyer" src={imageUrl(`events/${event.flyer}`)} alt={`${event.title} flyer`} loading="lazy" /></button>}
-          <time dateTime={event.date}>{new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", weekday: "short", timeZone: "UTC" }).format(new Date(`${event.date}T12:00:00Z`))}</time>
+          <div className="event-ticket"><span className="event-state">{past ? "From the album" : "Coming up"}</span><time dateTime={event.date}>{new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", weekday: "short", timeZone: "UTC" }).format(new Date(`${event.date}T12:00:00Z`))}</time></div>
           <h3>{event.title}</h3><p className="event-details">{event.time}<br />{event.location}</p>
           <p>{event.description}</p>{event.url && <a className="text-link" href={event.url} aria-label={`${past ? "View details" : "Details and RSVP"}: ${event.title}`}>{past ? "View details" : "Details & RSVP"} <span aria-hidden="true">↗</span></a>}
         </li>)}
@@ -68,7 +71,7 @@ export function Events() {
       {visible.length > 1 && <div className={`events-controls${visible.length <= 3 ? " events-controls-small" : ""}`}>
         <button type="button" disabled={!canScroll.left} onClick={() => scroll(-1)} aria-label="Scroll events left">←</button><span>Browse events</span><button type="button" disabled={!canScroll.right} onClick={() => scroll(1)} aria-label="Scroll events right">→</button>
       </div>}
-    </> : <div className="events-empty"><p>{past ? "No past events have been added for this month." : "New plans will be shared here when they’re confirmed."}</p><a className="text-link" href={links.heylo}>Visit BOP on Heylo <span aria-hidden="true">↗</span></a></div>}
+    </> : <div key={`empty-${past}-${month}`} className="events-empty"><p>{past ? "No past events have been added for this month." : "New plans will be shared here when they’re confirmed."}</p><a className="text-link" href={links.heylo}>Visit BOP on Heylo <span aria-hidden="true">↗</span></a></div>}
     {flyerIndex !== null && flyers[flyerIndex] && <PhotoGallery photos={flyers} folder="events" title="Event flyers" index={flyerIndex} onChange={setFlyerIndex} onClose={() => setFlyerIndex(null)} />}
   </section>;
 }

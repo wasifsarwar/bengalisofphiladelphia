@@ -9,6 +9,9 @@ import { Events } from "./components/Events";
 import { Wordmark } from "./components/Wordmark";
 
 export function App() {
+  const [photosArranged, setPhotosArranged] = useState(false);
+  const [plan, setPlan] = useState<number | null>(null);
+  const planNames = ["Cha & adda", "Out around Philly", "Games & good company"];
   const [photoIndex, setPhotoIndex] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -61,7 +64,7 @@ export function App() {
             <a href="#gatherings" aria-current={activeSection === "gatherings" ? "location" : undefined} onClick={closeMenu}>Gatherings</a>
             <a href="#get-involved" aria-current={activeSection === "get-involved" ? "location" : undefined} onClick={closeMenu}>Get involved</a>
           </nav>
-          <a className="button header-join" href={links.heylo}>Join BOP <span aria-hidden="true">↗</span></a>
+          <a className="button header-join" href={links.heylo} aria-label="Join BOP on Heylo">Join BOP <span aria-hidden="true">↗</span></a>
         </div>
       </header>
 
@@ -69,14 +72,16 @@ export function App() {
         <section className="hero wrap" id="home" aria-labelledby="hero-heading">
           <div className="hero-copy">
             <p className="location-note"><span aria-hidden="true">✳</span> A Bengali community in Philadelphia</p>
-            <h1 id="hero-heading">A little<br />Bangladesh.<br /><em>A lot of<br />Philadelphia.</em></h1>
+            <h1 id="hero-heading">A little<br />Bangladesh.<br /><em><span>A lot of</span><span>Philadelphia.</span></em></h1>
             <p className="hero-description">Familiar roots. New friendships. A place to meet,<br className="desktop-break" /> share some cha, and make this city feel like home.</p>
-            <div className="hero-actions"><a className="button" href={links.heylo}>Join the community <span aria-hidden="true">↗</span></a><a className="quiet-link" href="#our-story">Get to know us <span aria-hidden="true">↓</span></a></div>
+            <div className="hero-actions"><a className="button" href={links.heylo}>Join BOP on Heylo <span aria-hidden="true">↗</span></a><a className="quiet-link" href="#our-story">Get to know us <span aria-hidden="true">↓</span></a></div>
+            <p className="join-context">Find community plans and gathering details on Heylo.</p>
             <p className="welcome-note">Bengalis & honorary Bengalis welcome.</p>
           </div>
-          <div className="hero-collage">
+          <div className="hero-collage" data-arranged={photosArranged}>
             <PhotoSpace {...galleryPhotos[0]} onOpen={() => setPhotoIndex(0)} loading="eager" className="hero-photo-main" />
             <PhotoSpace {...galleryPhotos[1]} onOpen={() => setPhotoIndex(1)} loading="eager" className="hero-photo-small" tone="rose" />
+            <button type="button" className="arrange-photos" aria-pressed={photosArranged} onClick={() => setPhotosArranged(!photosArranged)}>{photosArranged ? "Scatter the prints" : "Arrange the prints"} <span aria-hidden="true">↔</span></button>
           </div>
         </section>
 
@@ -91,7 +96,7 @@ export function App() {
             <h2 id="story-heading">There’s always<br />room for<br /><em>one more.</em></h2>
             <p>We’re building a Bengali community in Philadelphia, rooted in Bangladesh and open to honorary Bengalis, too.</p>
             <p>Think cha and adda, a walk around the city, or a good reason to get together. Whether you’re new to Philly or have called it home for years, you’re welcome here.</p>
-            <a className="text-link" href={links.heylo}>Come say hello <span aria-hidden="true">↗</span></a>
+            <a className="text-link" href={links.heylo}>Join BOP on Heylo <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 
@@ -101,29 +106,39 @@ export function App() {
           <div className="wrap">
             <div className="gatherings-heading">
               <div><p className="section-label">Things we’re planning</p><h2 id="gatherings-heading">Let’s make <em>a plan.</em></h2></div>
-              <div className="gatherings-note"><p>A few ideas to get us together.<br />Confirmed dates and details will be shared on Heylo.</p><a className="text-link" href={links.heylo}>Follow the plans on Heylo <span aria-hidden="true">↗</span></a></div>
+
+            </div>
+            <div className="plan-picker">
+              <div className="plan-options" role="group" aria-label="Pick your kind of gathering">
+                <span>What sounds like you?</span>
+                {planNames.map((name, index) => <button type="button" key={name} aria-pressed={plan === index} onClick={() => setPlan(plan === index ? null : index)}>{name}</button>)}
+              </div>
+              <div className="plan-response" aria-live="polite" aria-atomic="true">
+                {plan === null ? <p>Choose a plan to highlight it.</p> : <p><Flower /> Your pick: {planNames[plan]}. <a href={`${links.email}?subject=${encodeURIComponent(`Gathering idea: ${planNames[plan]}`)}&body=${encodeURIComponent(`Hi BOP! I’d love to suggest a ${planNames[plan]} gathering.\n\nHere’s my idea: `)}`}>Suggest this by email <span aria-hidden="true">↗</span></a></p>}
+              </div>
             </div>
             <div className="gathering-grid">
-              <article className="gathering"><PhotoSpace {...galleryPhotos[3]} onOpen={() => setPhotoIndex(3)} tone="rose" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Cha & adda</h3><p>A cup of cha, something to snack on, and plenty to catch up about.</p></div></article>
-              <article className="gathering"><PhotoSpace {...galleryPhotos[4]} onOpen={() => setPhotoIndex(4)} tone="sand" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Out around Philly</h3><p>Riverside walks, museum days, and a few new favorite corners of the city.</p></div></article>
-              <article className="gathering"><PhotoSpace {...galleryPhotos[5]} onOpen={() => setPhotoIndex(5)} className="photo-game" tone="olive" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Games & good company</h3><p>Bring your competitive side, a game suggestion, or just yourself.</p></div></article>
+              <article className="gathering" data-picked={plan === 0}><PhotoSpace {...galleryPhotos[3]} onOpen={() => setPhotoIndex(3)} tone="rose" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Cha & adda</h3><p>A cup of cha, something to snack on, and plenty to catch up about.</p></div></article>
+              <article className="gathering" data-picked={plan === 1}><PhotoSpace {...galleryPhotos[4]} onOpen={() => setPhotoIndex(4)} tone="sand" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Out around Philly</h3><p>Riverside walks, museum days, and a few new favorite corners of the city.</p></div></article>
+              <article className="gathering" data-picked={plan === 2}><PhotoSpace {...galleryPhotos[5]} onOpen={() => setPhotoIndex(5)} className="photo-game" tone="olive" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Games & good company</h3><p>Bring your competitive side, a game suggestion, or just yourself.</p></div></article>
             </div>
+            <div className="gatherings-note"><p>A few ideas to get us together.<br />Confirmed dates and details will be shared on Heylo.</p><a className="text-link" href={links.heylo}>Follow the plans on Heylo <span aria-hidden="true">↗</span></a></div>
           </div>
         </section>
 
         <section className="involvement wrap" id="get-involved" aria-labelledby="involvement-heading">
           <Flower className="involvement-flower" />
           <div className="involvement-copy"><p className="section-label">Help shape BOP</p><h2 id="involvement-heading">Bring an idea.<br /><em>Bring yourself.</em></h2><p>Know a good cha spot? Have a walk, game night, or gathering in mind? Help make it happen.</p></div>
-          <div className="involvement-actions"><a className="involvement-link" href={links.host}><span><strong>Become a social host</strong><span>Help bring people together.</span></span><span className="round-arrow" aria-hidden="true">↗</span></a><a className="involvement-link" href={links.email}><span><strong>Share an idea</strong><span>We’d love to hear what you have in mind.</span></span><span className="round-arrow" aria-hidden="true">↗</span></a></div>
+          <div className="involvement-actions"><a className="involvement-link" href={links.host}><span><strong>Open social host form</strong><span>Interested in hosting? Tell us through our Google Form.</span></span><span className="round-arrow" aria-hidden="true">↗</span></a><a className="involvement-link" href={links.email}><span><strong>Email an idea</strong><span>Have a gathering in mind? Send us an email.</span></span><span className="round-arrow" aria-hidden="true">↗</span></a></div>
         </section>
 
         <section className="join" aria-labelledby="join-heading">
-          <div className="wrap join-inner"><Flower /><p>A little connection goes a long way.</p><h2 id="join-heading">Come for the cha.<br /><em>Stay for the adda.</em></h2><a className="button button-cream" href={links.heylo}>Join BOP on Heylo <span aria-hidden="true">↗</span></a><p className="join-note">Your next hello starts here.</p></div>
+          <div className="wrap join-inner"><Flower /><p>A little connection goes a long way.</p><h2 id="join-heading">Come for the cha.<br /><em>Stay for the adda.</em></h2><a className="button button-cream" href={links.heylo}>Join BOP on Heylo <span aria-hidden="true">↗</span></a><p className="join-note">Find community plans and gathering details on Heylo.</p></div>
         </section>
       </main>
 
       {photoIndex !== null && <PhotoGallery index={photoIndex} onChange={setPhotoIndex} onClose={() => setPhotoIndex(null)} />}
-      <footer className="footer wrap"><div className="footer-top"><a className="brand" href="#home" aria-label="Bengalis of Philadelphia home"><Wordmark /></a><p>Rooted in Bangladesh.<br />Together in Philly.</p><div className="footer-links"><a href={links.instagram}>Instagram <span aria-hidden="true">↗</span></a><a href={links.email}>Say hello <span aria-hidden="true">↗</span></a></div></div><div className="footer-bottom"><span>Bengalis of Philadelphia</span><a href="#home">Back to top ↑</a></div></footer>
+      <footer className="footer wrap"><div className="footer-top"><a className="brand" href="#home" aria-label="Bengalis of Philadelphia home"><Wordmark /></a><p>Rooted in Bangladesh.<br />Together in Philly.</p><div className="footer-links"><a href={links.instagram}>Instagram <span aria-hidden="true">↗</span></a><a href={links.email}>Email BOP <span aria-hidden="true">↗</span></a></div></div><div className="footer-bottom"><span>Bengalis of Philadelphia</span><a href="#home">Back to top ↑</a></div></footer>
     </>
   );
 }
