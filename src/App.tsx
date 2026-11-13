@@ -1,8 +1,10 @@
+import { pageFromPath } from "./data/pages";
+import { CommunityAlbum } from "./components/CommunityAlbum";
 import { HeroPrints } from "./components/HeroPrints";
 import { EtchedSignature } from "./components/EtchedSignature";
 import { useEffect, useRef, useState } from "react";
 import { useScrollReveal } from "./hooks/useScrollReveal";
-import { links } from "./data/content";
+import { imageUrl, links } from "./data/content";
 import { Flower } from "./components/Flower";
 import { PhotoSpace } from "./components/PhotoSpace";
 import { PhotoGallery } from "./components/LazyPhotoGallery";
@@ -13,41 +15,46 @@ import { Wordmark } from "./components/Wordmark";
 export function App() {
   const [photoIndex, setPhotoIndex] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const base = import.meta.env.BASE_URL;
+  const page = pageFromPath(location.pathname, base);
   const header = useRef<HTMLElement>(null);
   useEffect(() => {
-    const sections = ["our-story", "events", "gatherings", "get-involved"]
-      .map(id => document.getElementById(id)).filter((node): node is HTMLElement => !!node);
     let frame = 0;
     let lastHeaderHeight = -1;
     const update = () => {
       frame = 0;
       const height = header.current?.getBoundingClientRect().height ?? 100;
-      const readingLine = height + 60;
-      const current = sections.find(section => {
-        const bounds = section.getBoundingClientRect();
-        return bounds.top <= readingLine && bounds.bottom > readingLine;
-      });
       if (height !== lastHeaderHeight) {
         document.documentElement.style.setProperty("--header-height", `${height}px`);
         lastHeaderHeight = height;
       }
-      setActiveSection(current?.id ?? "");
+
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     const resize = new ResizeObserver(schedule);
     if (header.current) resize.observe(header.current);
-    window.addEventListener("scroll", schedule, { passive: true });
+    document.title = `${page === "home" ? "" : page === "events" ? "Events | " : "Photos | "}Bengalis of Philadelphia`;
     window.addEventListener("resize", schedule);
     update();
     return () => {
       cancelAnimationFrame(frame);
       resize.disconnect();
-      window.removeEventListener("scroll", schedule);
+
       window.removeEventListener("resize", schedule);
       document.documentElement.style.removeProperty("--header-height");
     };
-  }, []);
+  }, [page]);
+  useEffect(() => {
+    let cancelled = false;
+    const target = location.hash.slice(1);
+    if (target) {
+      // Native fragment navigation happens before React creates the section.
+      document.fonts.ready.then(() => {
+        if (!cancelled) document.getElementById(target)?.scrollIntoView({ behavior: "instant" });
+      });
+    }
+    return () => { cancelled = true; };
+  }, [page]);
   const menuButton = useRef<HTMLButtonElement>(null);
   const main = useRef<HTMLElement>(null);
   useScrollReveal(main);
@@ -59,23 +66,23 @@ export function App() {
         if (event.key === "Escape" && menuOpen) { setMenuOpen(false); menuButton.current?.focus(); }
       }}>
         <div className="wrap header-inner">
-          <a className="brand" href="#home" aria-label="Bengalis of Philadelphia home" onClick={closeMenu}><Wordmark /></a>
+          <a className="brand" href={base} aria-label="Bengalis of Philadelphia home" onClick={closeMenu}><Wordmark /></a>
           <button className="menu-button" ref={menuButton} aria-expanded={menuOpen} aria-controls="navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? "Close" : "Menu"}</button>
           <nav id="navigation" className={menuOpen ? "navigation open" : "navigation"} aria-label="Main navigation">
-            <a href="#our-story" aria-current={activeSection === "our-story" ? "location" : undefined} onClick={closeMenu}>Our story</a>
-            <a href="#events" aria-current={activeSection === "events" ? "location" : undefined} onClick={closeMenu}>Events</a>
-            <a href="#gatherings" aria-current={activeSection === "gatherings" ? "location" : undefined} onClick={closeMenu}>Gatherings</a>
-            <a href="#get-involved" aria-current={activeSection === "get-involved" ? "location" : undefined} onClick={closeMenu}>Get involved</a>
+            <a href={base} aria-current={page === "home" ? "page" : undefined} onClick={closeMenu}>Home</a>
+            <a href={`${base}events/`} aria-current={page === "events" ? "page" : undefined} onClick={closeMenu}>Events</a>
+            <a href={`${base}photos/`} aria-current={page === "photos" ? "page" : undefined} onClick={closeMenu}>Photos</a>
           </nav>
           <a className="button header-join" href={links.heylo} aria-label="Join BOP on Heylo">Join BOP <span aria-hidden="true">↗</span></a>
         </div>
       </header>
 
-      <main id="main" ref={main} tabIndex={-1}>
+      <main id="main" ref={main} tabIndex={-1} className={`page-${page}`}>
+        {page === "home" && <>
         <section className="hero wrap" id="home" aria-labelledby="hero-heading">
           <div className="hero-copy">
             <p className="location-note"><span aria-hidden="true">✳</span> A Bengali community in Philadelphia</p>
-            <h1 id="hero-heading">A little<br />Bangladesh.<br /><em><span>A lot of</span><span>Philadelphia.</span></em></h1>
+            <h1 id="hero-heading"><span className="hero-line">A little</span><span className="hero-line">Bangladesh.</span><em><span className="hero-line">A lot of</span><span className="hero-line">Philadelphia.</span></em></h1>
             <div className="hero-actions"><a className="button" href={links.heylo}>Join BOP on Heylo <span aria-hidden="true">↗</span></a><a className="quiet-link" href="#our-story">Get to know us <span aria-hidden="true">↓</span></a></div>
             <p className="join-context">Find community plans and gathering details on Heylo.</p>
             <p className="welcome-note"><Flower />Bengalis & honorary Bengalis welcome.</p>
@@ -94,26 +101,16 @@ export function App() {
             <h2 id="story-heading">There’s always<br />room for<br /><em>one more.</em></h2>
             <p>We’re building a Bengali community in Philadelphia, rooted in Bangladesh and open to honorary Bengalis, too.</p>
             <p>Think cha and adda, a walk around the city, or a good reason to get together. Whether you’re new to Philly or have called it home for years, you’re welcome here.</p>
-            <a className="text-link" href={links.heylo}>Join BOP on Heylo <span aria-hidden="true">↗</span></a>
+            <a className="text-link" href={`${base}events/`}>Explore upcoming and past events <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 
-        <Events />
-
-        <section className="gatherings" id="gatherings" aria-labelledby="gatherings-heading">
-          <div className="wrap">
-            <div className="gatherings-heading">
-              <div><p className="section-label">Things we’re planning</p><h2 id="gatherings-heading">Let’s make <em>a plan.</em></h2></div>
-
-            </div>
-            <div className="gathering-grid">
-              <article className="gathering"><PhotoSpace {...galleryPhotos[3]} onOpen={() => setPhotoIndex(3)} tone="rose" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Cha & adda</h3><p>A cup of cha, something to snack on, and plenty to catch up about.</p></div></article>
-              <article className="gathering"><PhotoSpace {...galleryPhotos[4]} onOpen={() => setPhotoIndex(4)} tone="sand" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Out around Philly</h3><p>Riverside walks, museum days, and a few new favorite corners of the city.</p></div></article>
-              <article className="gathering"><PhotoSpace {...galleryPhotos[5]} onOpen={() => setPhotoIndex(5)} className="photo-game" tone="olive" /><div className="gathering-copy"><p className="idea-label">Gathering idea</p><h3>Games & good company</h3><p>Bring your competitive side, a game suggestion, or just yourself.</p></div></article>
-            </div>
-            <div className="gatherings-note"><p>A few ideas to get us together.<br />Confirmed dates and details will be shared on Heylo.</p><a className="text-link" href={links.heylo}>Follow the plans on Heylo <span aria-hidden="true">↗</span></a></div>
-          </div>
-        </section>
+        <div className="wrap home-destinations" aria-label="Explore BOP">
+          <a className="home-album-link" href={`${base}photos/`}>
+            <span className="album-mini" aria-hidden="true">{["BOP_Hike", "BOP_Game_Night", "BOP_Craft_Event"].map(name => <img key={name} src={imageUrl(`community/previews/${name}-480.webp`)} alt="" loading="lazy" />)}</span>
+            <span>Explore our community album</span><span className="album-link-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
 
         <section className="involvement wrap" id="get-involved" aria-labelledby="involvement-heading">
           <Flower className="involvement-flower" />
@@ -121,13 +118,17 @@ export function App() {
           <div className="involvement-actions"><a className="involvement-link" href={links.host}><span><strong>Open social host form</strong><span>Interested in hosting? Tell us through our Google Form.</span></span><span className="round-arrow" aria-hidden="true">↗</span></a><a className="involvement-link" href={links.email}><span><strong>Email an idea</strong><span>Have a gathering in mind? Send us an email.</span></span><span className="round-arrow" aria-hidden="true">↗</span></a></div>
         </section>
 
-        <section className="join" aria-labelledby="join-heading">
-          <div className="wrap join-inner"><EtchedSignature variant="closing" label="bop." /><Flower /><h2 id="join-heading">Come for the cha.<br /><em>Stay for the adda.</em></h2><a className="button button-cream" href={links.heylo}>Join BOP on Heylo <span aria-hidden="true">↗</span></a><p className="join-note">Find community plans and gathering details on Heylo.</p></div>
-        </section>
+        </>}
+        {page === "events" && <><Events /><div className="wrap event-host-link"><a className="text-link" href={`${base}#get-involved`}>Have an idea for a gathering? <span aria-hidden="true">↗</span></a></div></>}
+        {page === "photos" && <CommunityAlbum onOpen={setPhotoIndex} fullPage />}
+
+        {page === "home" && <section className="join" aria-labelledby="join-heading">
+          <div className="wrap join-inner"><EtchedSignature variant="closing" label="bop." /><Flower /><h2 id="join-heading">Come for the cha.<br /><em>Stay for the adda.</em></h2><a className="button button-cream" href={links.heylo}>Join BOP on Heylo <span aria-hidden="true">↗</span></a></div>
+        </section>}
       </main>
 
       {photoIndex !== null && <PhotoGallery index={photoIndex} onChange={setPhotoIndex} onClose={() => setPhotoIndex(null)} />}
-      <footer className="footer wrap"><div className="footer-top"><a className="brand" href="#home" aria-label="Bengalis of Philadelphia home"><Wordmark /></a><p>Rooted in Bangladesh.<br />Together in Philly.</p><div className="footer-links"><a href={links.instagram}>Instagram <span aria-hidden="true">↗</span></a><a href={links.email}>Email BOP <span aria-hidden="true">↗</span></a></div></div><div className="footer-bottom"><span>Bengalis of Philadelphia</span><a href="#home">Back to top ↑</a></div></footer>
+      <footer className="footer wrap"><div className="footer-top"><a className="brand" href={base} aria-label="Bengalis of Philadelphia home"><Wordmark /></a><p>Rooted in Bangladesh.<br />Together in Philly.</p><div className="footer-links"><a href={links.instagram}>Instagram <span aria-hidden="true">↗</span></a><a href={links.email}>Email BOP <span aria-hidden="true">↗</span></a></div></div><div className="footer-bottom"><span>Bengalis of Philadelphia</span><a href="#main">Back to top ↑</a></div></footer>
     </>
   );
 }

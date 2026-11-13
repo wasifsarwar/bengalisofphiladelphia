@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { galleryPhotos } from "../data/gallery";
 import { PhotoSpace } from "./PhotoSpace";
 
@@ -7,6 +7,40 @@ export function HeroPrints() {
   const stack = useRef<HTMLDivElement>(null);
   const previous = useRef<{ left: number; top: number; front: boolean }[] | null>(null);
   const busy = useRef(false);
+
+  useEffect(() => {
+    const surface = stack.current;
+    if (!surface) return;
+    const enabled = matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+    let frame = 0;
+    const reset = () => {
+      cancelAnimationFrame(frame);
+      surface.style.removeProperty("--paper-x");
+      surface.style.removeProperty("--paper-y");
+    };
+    const move = (event: PointerEvent) => {
+      if (!enabled.matches || event.pointerType !== "mouse") return;
+      const bounds = surface.getBoundingClientRect();
+      const x = Math.max(-1, Math.min(1, (event.clientX - bounds.left) / bounds.width * 2 - 1));
+      const y = Math.max(-1, Math.min(1, (event.clientY - bounds.top) / bounds.height * 2 - 1));
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        surface.style.setProperty("--paper-x", `${-y * 2}deg`);
+        surface.style.setProperty("--paper-y", `${x * 2}deg`);
+      });
+    };
+    surface.addEventListener("pointermove", move, { passive: true });
+    surface.addEventListener("pointerleave", reset);
+    enabled.addEventListener("change", reset);
+    window.addEventListener("blur", reset);
+    return () => {
+      reset();
+      surface.removeEventListener("pointermove", move);
+      surface.removeEventListener("pointerleave", reset);
+      enabled.removeEventListener("change", reset);
+      window.removeEventListener("blur", reset);
+    };
+  }, []);
 
   const swap = () => {
     if (busy.current || !stack.current) return;

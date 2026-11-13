@@ -1,79 +1,111 @@
 # Bengalis of Philadelphia
 
-The editorial community homepage is the active website. The earlier multipage
-implementation and Figma references have been retired. Future work starts from
-this design.
+A community website with Home, Events, and Photos pages, built with React, TypeScript, Vite, and plain CSS.
+The design uses cream, Bangladeshi green and red, Polaroid photos, and nakshi kantha
+stitch details.
 
-Live site: https://wasifsarwar.github.io/bengalisofphiladelphia/
+[Published site](https://wasifsarwar.github.io/bengalisofphiladelphia/).
+Local changes appear there only after a successful GitHub Pages deployment.
 
-## Development
+## Run locally
 
-Use Node 24 LTS:
+Use Node 24. From this folder:
 
 ```sh
 npm ci
 npm run dev -- --host 127.0.0.1
-npm run build
-npm run preview
 ```
 
-Open the printed local URL. `npm run build` runs strict TypeScript checking and
-creates the production site in `dist/`. Vite uses `/bengalisofphiladelphia/` as
-its base path for GitHub Pages. Source maps are disabled.
+Open the URL Vite prints, including `/bengalisofphiladelphia/`.
 
-## Source layout
+```sh
+npm run build       # Check TypeScript and build dist/
+npm run preview     # Preview the production build
+node --experimental-strip-types --test tests/*.test.mjs
+```
 
-- `index.html`: the single application entry.
-- `src/main.tsx`: fonts, stylesheet, and React startup.
-- `src/App.tsx`: homepage sections and mobile navigation.
-- `src/components/`: reusable photo frame, flower motif, and wordmark.
-- `src/style.css`: design tokens, layouts, and responsive styling.
-- `src/data/content.ts`: shared community destinations and image URL helper.
-- `src/hooks/useScrollReveal.ts`: repeatable reveals, viewport reset, and reduced-motion handling.
-- `src/components/PhotoSpace.tsx`: image loading and framing; hero photos opt into eager loading.
-- `src/components/Wordmark.tsx`: circular logo and handwritten name.
-- `public/images/community/`: real community photos.
-- `public/concept.html`: compatibility redirect for earlier preview links.
-- `docs/homepage.md`: current design and content guidance.
+## Pages
 
-Navigation scrolls to sections on the homepage. Join links use Heylo, the social
-host application uses Google Forms, and contact links open email or Instagram.
-There is no email subscription backend. Proposed gatherings have no invented dates.
+- `/`: hero prints, Our Story, ways to get involved, and links to Events and Photos.
+- `/events/`: upcoming/past events, month filters and flyers.
+- `/photos/`: the interactive community album and HD photo viewer.
 
-## Publishing and validation
+All paths sit below `/bengalisofphiladelphia/`. Navigation uses ordinary links
+and browser history. `scripts/build-pages.mjs` creates the static HTML entries
+after Vite builds, so direct links and refreshes work on GitHub Pages. Browsers
+that support page view transitions animate navigation; other browsers load normally.
 
-Push `main` to run `.github/workflows/pages.yml`. It installs dependencies, builds
-the site, and publishes `dist/` to GitHub Pages. Confirm the deployment succeeds
-before reporting an update as live.
+## Current features
 
-For UI changes, inspect the root page at desktop and phone sizes, verify navigation
-and images, and run `npm run build` plus `git diff --check`. The compatibility URL
-should redirect to the root while preserving section anchors.
+- Real Home, Events, and Photos URLs, a mobile menu, and links to Heylo, Instagram, email, and the host form.
+- Two matching hero Polaroids that shuffle when clicked or tapped.
+- Community photos and event flyers open in a viewer with arrows, thumbnails, zoom, and keyboard controls.
+- Upcoming and past events, a month selector, and horizontal scrolling when needed.
+- Responsive photo previews, original HD images in the viewer, and a viewer that loads on demand.
+- Reduced-motion support, keyboard focus indicators, and the circular BOP logo as the favicon.
 
-Follow `AGENTS.md` for BOP copy and contribution rules. Repository-local agent
-configuration remains in `.codex/`, with supporting tools under `.tools/mcp/` and
-the frontend-design skill under `.agents/skills/frontend-design/`.
+This is a static site. Events come from a project file; there is no admin dashboard
+or signup backend. Search indexing is currently disabled in `index.html`.
 
-## Focused code lookup
+## Update content
 
-Use this source layout as the codebase index before broad searches. Start at the
-owning file, then follow its imports. Serena indexes TypeScript symbols and excludes
-assets, bundled tools, installed skills, dependencies, build output, and critique
-archives via `.serena/project.yml`. Its generated cache stays untracked. Refresh
-it with `serena project index .` using the pinned Serena installation in
-`.codex/config.toml`; use symbol lookups for code and `rg` for CSS and copy.
+| What to change | Where |
+| --- | --- |
+| Homepage sections and wording | `src/App.tsx` |
+| Colors, fonts, spacing, and motion | `src/style.css` |
+| Confirmed events | `src/data/events.ts` |
+| Event flyer images | `public/images/events/` |
+| Photo captions and gallery order | `src/data/gallery.ts` |
+| Original community photos | `public/images/community/` |
+| Heylo, social, email, and host links | `src/data/content.ts` |
+| Browser icons | `public/bop-favicon.png`, `public/favicon.ico`, `public/apple-touch-icon.png` |
 
-## Monthly events
+See [the event guide](docs/events.md) for event fields. Past and upcoming status
+uses the date in Philadelphia. Gathering ideas are separate from confirmed events.
 
-Edit `src/data/events.ts`; see `docs/events.md` for fields and publishing.
-Run date/filter regressions with `node --experimental-strip-types --test tests/events.test.mjs`.
+After adding or replacing community PNGs, the source logo, or the handwritten font:
 
-Gallery transition and event regression checks: `node --experimental-strip-types --test tests/*.test.mjs`.
+```sh
+uv run scripts/optimize-assets.py
+```
 
-Photo previews are generated with `uv run scripts/optimize-assets.py` after
-adding or changing community PNGs, the source logo, or Patrick Hand font. This
-creates responsive WebP previews and a Latin WOFF2 font, preserving all originals.
-Unprocessed photos fall back to their original file. The photo viewer loads the
-original images; the homepage chooses previews based on viewport and pixel density.
-Validation: `npm run build` and
-`node --experimental-strip-types --test tests/*.test.mjs`.
+This creates WebP previews, their size list, and a smaller font file. It keeps
+originals untouched. Photos without generated previews use their original file.
+Commit the generated assets along with the content change.
+
+## Impeccable controls
+
+These are requests to the coding agent, not website controls. For example:
+`$impeccable polish the hero`.
+
+| Command | Use it for |
+| --- | --- |
+| `$impeccable layout` | Spacing, grouping, and responsive layout |
+| `$impeccable polish` | Small visual refinements |
+| `$impeccable delight` | Personal, useful interaction details |
+| `$impeccable animate` | Motion and transitions |
+| `$impeccable critique` | A usability and design review |
+| `$impeccable audit` | Accessibility and frontend quality checks |
+| `$impeccable optimize` | Loading speed and rendering costs |
+| `$impeccable clarify` | Clearer labels and copy |
+| `$impeccable hooks on` / `off` / `status` | Control the design detector |
+
+The detector is enabled in `.impeccable/config.json`. Keep the existing visual
+style, English wording, HD originals, and reduced-motion behavior when refining UI.
+
+Project MCP settings are in `.codex/config.toml`: Playwright for browser checks,
+Serena for code lookup, Context7 for documentation, and Memory for saved context.
+Availability depends on the active agent session; configuration alone does not
+prove a server is connected. The paths are specific to this Mac.
+
+## Publish and check
+
+Pushing `main` runs `.github/workflows/pages.yml`, which builds and publishes
+`dist/` to GitHub Pages. Check that the deployment succeeds before calling it live.
+
+For UI changes, run the build and tests, then inspect desktop and phone layouts
+with Playwright. Check navigation, print shuffling, the photo viewer, image loading,
+keyboard use, reduced motion, and horizontal overflow. Run `git diff --check`.
+
+Follow [AGENTS.md](AGENTS.md) for contribution rules. See
+[homepage notes](docs/homepage.md) for more detail about the design.

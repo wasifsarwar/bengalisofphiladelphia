@@ -46,7 +46,7 @@ export function Events() {
   return <section className="events wrap" id="events" aria-labelledby="events-heading">
     <div className="stitched-divider" aria-hidden="true"><span /><Flower /><span /></div>
     <div className="events-heading">
-      <div key={`heading-${past}`} className="events-view-heading"><h2 id="events-heading">{past ? "Past events" : "Upcoming events"}</h2><p>{past ? "A look back at time spent together." : "Make time for good company."}</p></div>
+      <div key={`heading-${past}`} className="events-view-heading"><h1 id="events-heading">{past ? "Past events" : "Upcoming events"}</h1>{past && <p>A look back at time spent together.</p>}</div>
 
     </div>
     <div className="events-toolbar">
@@ -72,7 +72,7 @@ export function Events() {
       {visible.length > 1 && <div className={`events-controls${visible.length <= 3 ? " events-controls-small" : ""}`}>
         <button type="button" disabled={!canScroll.left} onClick={() => scroll(-1)} aria-label="Scroll events left">←</button><span>Browse events</span><button type="button" disabled={!canScroll.right} onClick={() => scroll(1)} aria-label="Scroll events right">→</button>
       </div>}
-    </> : <div key={`empty-${past}-${month}`} className="events-empty"><p>{past ? "No past events have been added for this month." : "New plans will be shared here when they’re confirmed."}</p><a className="text-link" href={links.heylo}>Visit BOP on Heylo <span aria-hidden="true">↗</span></a></div>}
+    </> : <div key={`empty-${past}-${month}`} className="events-empty"><Flower /><div className="events-empty-copy">{!past && <h3>No upcoming events yet.</h3>}<p>{past ? "No past events have been added for this month." : "New plans will be shared here when they’re confirmed."}</p><a className="text-link" href={links.heylo}>Visit BOP on Heylo <span aria-hidden="true">↗</span></a></div></div>}
     {flyerIndex !== null && flyers[flyerIndex] && <PhotoGallery photos={flyers} folder="events" title="Event flyers" index={flyerIndex} onChange={setFlyerIndex} onClose={() => setFlyerIndex(null)} />}
   </section>;
 }

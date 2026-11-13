@@ -2,7 +2,11 @@
 
 This is the approved Bengalis of Philadelphia website, promoted from the desktop
 concept. The former multipage design is retired and remains available only in
-Git history. There is one application and one stylesheet.
+Git history. There is one React application and one stylesheet, serving three static page URLs.
+Home keeps the hero, Our Story, participation, and join sections, with links to Events and Photos.
+Events (`events/`) holds the full event controls. Photos
+(`photos/`) holds the interactive album. Shared navigation uses real links and
+normal browser history. The build generates HTML for each destination.
 
 ## Visual direction
 
@@ -11,7 +15,7 @@ Use warm cream (#f8f3e9), Bengali red (#982c36), wine (#802a32), forest green
 DM Sans handles body text and navigation. Fonts are served locally.
 
 The homepage flows from a large introduction and overlapping photo prints to a
-community ribbon, introduction, gathering ideas, participation links, and a final
+community ribbon, introduction, album link, participation links, and a final
 join invitation. Preserve this design when making routine edits.
 
 ## Photos
@@ -21,8 +25,8 @@ image filenames are resolved beneath `public/images/community/` using Vite's
 configured base path. Supply descriptive alternative text for each real image. Below-fold photos load
 lazily with asynchronous decoding; the hero pair loads eagerly.
 
-- Large hero frame: `BOP_Hike.png`.
-- Front hero frame: `BOP_Game_Night.png`, with a landscape frame to preserve the group.
+- Rear hero frame: `BOP_Hike.png`.
+- Front hero frame: `BOP_Game_Night.png`, with a matching square frame; the full original is available in the viewer.
 - Story frame: `BOP_Craft_Event.png`, preserving the full group.
 - Games gathering frame: `BOP_Bhoot_Game.png`, shown uncropped.
 - Cha and adda frame: `BOP_Cat_Event.png`.
@@ -155,3 +159,44 @@ sequence; rapid taps during the sequence are ignored, and reduced motion swaps
 instantly. Playwright checked both directions at 1440, 390, and 320px, keyboard
 activation, no horizontal overflow during the shuffle, and no reduced-motion
 animations.
+
+## Album motion
+
+The headline unfolds in four short staggered lines, followed by the hero prints
+being dealt into position and the invitation being revealed. Story and gathering
+photos use an album-page mask with a gentle image settle when entering the viewport.
+Gallery browsing follows the arrow direction with a brief page-turn treatment.
+The print shuffle and shared photo expansion remain intact. No motion dependency
+or continuous loop was added. Reduced motion shows the complete static composition.
+Playwright checked 320, 390, 768, and 1440px, including overflow during entry,
+print containment, shuffling, viewer navigation, and reduced motion.
+
+Desktop mouse movement adds a bounded two-degree paper-depth response to the hero
+stack without React renders. It resets on pointer leave, window blur, or motion
+preference changes. Touch and reduced-motion users get the stable stack and the
+same shuffle action. Ribbon flowers turn with viewport progress where scroll
+animation timelines are supported; otherwise they remain static. Involvement
+links reveal a pale green wash on hover or keyboard focus, and the closing floral
+motif blooms on entry. These effects add no perpetual animation or new dependency.
+
+## Community album centerpiece
+
+`CommunityAlbum.tsx` places the six supplied photos between gatherings and the
+involvement section. On desktop the Polaroids fan open on entry; hovering or
+keyboard-focusing a print lifts it above its neighbors. On smaller screens the
+same photos form a native horizontal swipe row with snap points and a visible
+next print. Every photo opens the existing HD viewer. Captions use the shared
+italic serif styling and originals remain unchanged. The fan animation has a
+static reduced-motion fallback and adds no animation dependency.
+
+## Content ownership after the redundancy pass
+
+Home introduces BOP, links to Events and Photos, and holds the participation
+options and closing join invitation. Our Story remains a Home section reached
+from the hero, not a duplicate navigation destination. Event listings, filters,
+and flyers exist only on Events. The speculative gathering cards were removed
+from that page to keep confirmed events clear. Photos owns the full album.
+The header keeps one consistent Join link on every page; the large closing join
+section appears only on Home. No filler content was added. The previous preview
+and album navigation treatments above describe earlier iterations; event preview
+mode has been removed from the component.
