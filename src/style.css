@@ -629,10 +629,7 @@ em { font-weight: 500; }
 @keyframes signature-point { 0% { offset-distance: 0%; opacity: 0; } 5%, 90% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
 
 /* Photo-paper details: light on the image, a lifted paper corner, and a soft press. */
-:is(.hero-photo-main, .hero-photo-small, .story-image .photo-space) {
-  position: relative;
-}
-.hero-photo-main, .hero-photo-small { position: absolute; }
+.story-image .photo-space { position: relative; }
 :is(.hero-photo-main, .hero-photo-small, .story-image .photo-space)::after {
   content: "";
   position: absolute;
@@ -670,3 +667,32 @@ em { font-weight: 500; }
     .story-image .photo-space:has(.photo-open:hover) { rotate: -1deg; box-shadow: 3px 14px 26px #4e37232b; }
   }
 }
+
+/* Equal-sized keepsakes, contained within the hero at every breakpoint. */
+.hero-photo-main, .hero-photo-small { width: 66%; }
+.hero-photo-main { top: 20px; right: 14px; }
+.hero-photo-small { bottom: 24px; left: 14px; }
+.hero-photo-main .photo-surface, .hero-photo-small .photo-surface { aspect-ratio: 1; }
+.hero-photo-main figcaption, .hero-photo-small figcaption { font-size: 20px; padding-block: 17px; }
+@media (max-width: 1150px) {
+  .hero-photo-main figcaption, .hero-photo-small figcaption { font-size: 17px; padding-block: 15px; }
+}
+@media (max-width: 850px) {
+  .hero-photo-main, .hero-photo-small { width: 72%; }
+  .hero-photo-main { top: 28px; right: 12px; }
+  .hero-photo-small { bottom: 28px; left: 12px; }
+  .hero-photo-main figcaption, .hero-photo-small figcaption { font-size: 16px; }
+}
+@media (max-width: 600px) {
+  .hero-photo-main, .hero-photo-small { width: 66%; }
+  .hero-photo-main { top: 22px; }
+  .hero-photo-small { bottom: 22px; }
+  .hero-photo-main figcaption, .hero-photo-small figcaption { font-size: 16px; padding-block: 13px; }
+}
+
+/* The print shuffle owns its motion; ordinary hover must not override it. */
+.hero-print-stack .photo-space { animation: none; transition: box-shadow 250ms; }
+.hero-print-stack .hero-photo-main { transform: rotate(5deg); z-index: 1; }
+.hero-print-stack .hero-photo-small { transform: rotate(-9deg); z-index: 2; }
+.hero-print-stack .photo-open { cursor: pointer; }
+.hero-print-stack .photo-space:has(.photo-open:focus-visible) { outline: 2px solid var(--green); outline-offset: 5px; }

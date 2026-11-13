@@ -1,3 +1,4 @@
+import { HeroPrints } from "./components/HeroPrints";
 import { EtchedSignature } from "./components/EtchedSignature";
 import { useEffect, useRef, useState } from "react";
 import { useScrollReveal } from "./hooks/useScrollReveal";
@@ -76,10 +77,7 @@ export function App() {
             <p className="join-context">Find community plans and gathering details on Heylo.</p>
             <p className="welcome-note">Bengalis & honorary Bengalis welcome.</p>
           </div>
-          <div className="hero-collage">
-            <PhotoSpace {...galleryPhotos[0]} onOpen={() => setPhotoIndex(0)} loading="eager" className="hero-photo-main" />
-            <PhotoSpace {...galleryPhotos[1]} onOpen={() => setPhotoIndex(1)} loading="eager" className="hero-photo-small" tone="rose" />
-          </div>
+          <HeroPrints />
         </section>
 
         <div className="community-ribbon" aria-label="Cha and adda, familiar roots, new friendships, Philly plans">

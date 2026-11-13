@@ -144,3 +144,14 @@ SVG outlines. The generated paths live in `src/data/signatures.ts`.
 
 The closing invitation omits the former connection tagline; the floral motif and
 nakshi kantha thread details remain.
+
+## Hero print shuffle
+
+Clicking or tapping either hero print swaps the two keepsakes, with the front
+print sliding outward before settling behind its companion. The hero uses native
+buttons with descriptive shuffle labels and keyboard support. Other community
+photos still open the photo viewer. `HeroPrints.tsx` owns the brief Web Animations
+sequence; rapid taps during the sequence are ignored, and reduced motion swaps
+instantly. Playwright checked both directions at 1440, 390, and 320px, keyboard
+activation, no horizontal overflow during the shuffle, and no reduced-motion
+animations.
