@@ -109,3 +109,12 @@ keyboard use, reduced motion, and horizontal overflow. Run `git diff --check`.
 
 Follow [AGENTS.md](AGENTS.md) for contribution rules. See
 [homepage notes](docs/homepage.md) for more detail about the design.
+
+## Link previews
+
+Sharing metadata is in `index.html`; `scripts/build-pages.mjs` gives Events and
+Photos their own titles, descriptions, and canonical URLs. The large preview image
+is `public/images/bop-share.jpg`. Regenerate it with
+`uv run scripts/generate-share-image.py`. Deploy before testing shared links.
+Preview size and caching are controlled by the receiving app; old messages may
+keep their previous preview.
