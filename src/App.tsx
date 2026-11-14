@@ -14,7 +14,6 @@ import { Wordmark } from "./components/Wordmark";
 
 export function App() {
   const [photoIndex, setPhotoIndex] = useState<number | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
   const base = import.meta.env.BASE_URL;
   const page = pageFromPath(location.pathname, base);
   const header = useRef<HTMLElement>(null);
@@ -55,23 +54,18 @@ export function App() {
     }
     return () => { cancelled = true; };
   }, [page]);
-  const menuButton = useRef<HTMLButtonElement>(null);
   const main = useRef<HTMLElement>(null);
   useScrollReveal(main);
-  const closeMenu = () => setMenuOpen(false);
   return (
     <>
       <a className="skip-link" href="#main" onClick={() => main.current?.focus()}>Skip to content</a>
-      <header ref={header} className="header" onKeyDown={(event) => {
-        if (event.key === "Escape" && menuOpen) { setMenuOpen(false); menuButton.current?.focus(); }
-      }}>
+      <header ref={header} className="header">
         <div className="wrap header-inner">
-          <a className="brand" href={base} aria-label="Bengalis of Philadelphia home" onClick={closeMenu}><Wordmark /></a>
-          <button className="menu-button" ref={menuButton} aria-expanded={menuOpen} aria-controls="navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? "Close" : "Menu"}</button>
-          <nav id="navigation" className={menuOpen ? "navigation open" : "navigation"} aria-label="Main navigation">
-            <a href={base} aria-current={page === "home" ? "page" : undefined} onClick={closeMenu}>Home</a>
-            <a href={`${base}events/`} aria-current={page === "events" ? "page" : undefined} onClick={closeMenu}>Events</a>
-            <a href={`${base}photos/`} aria-current={page === "photos" ? "page" : undefined} onClick={closeMenu}>Photos</a>
+          <a className="brand" href={base} aria-label="Bengalis of Philadelphia home"><Wordmark /></a>
+          <nav id="navigation" className="navigation" aria-label="Main navigation">
+            <a href={base} aria-current={page === "home" ? "page" : undefined}>Home</a>
+            <a href={`${base}events/`} aria-current={page === "events" ? "page" : undefined}>Events</a>
+            <a href={`${base}photos/`} aria-current={page === "photos" ? "page" : undefined}>Photos</a>
           </nav>
           <a className="button header-join" href={links.heylo} aria-label="Join BOP on Heylo">Join BOP <span aria-hidden="true">↗</span></a>
         </div>
@@ -101,7 +95,7 @@ export function App() {
             <h2 id="story-heading">There’s always<br />room for<br /><em>one more.</em></h2>
             <p>We’re building a Bengali community in Philadelphia, rooted in Bangladesh and open to honorary Bengalis, too.</p>
             <p>Think cha and adda, a walk around the city, or a good reason to get together. Whether you’re new to Philly or have called it home for years, you’re welcome here.</p>
-            <a className="text-link" href={`${base}events/`}>Explore upcoming and past events <span aria-hidden="true">↗</span></a>
+            <a className="text-link events-link" href={`${base}events/`}>Explore upcoming and past events <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 

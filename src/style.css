@@ -897,3 +897,27 @@ em { font-weight: 500; }
 .home-destinations .home-album-link { margin-top: 0; }
 .page-events .events { padding-bottom: 40px; }
 .event-host-link { padding-bottom: 64px; }
+
+/* Mobile destinations stay beside the brand, never behind a menu. */
+@media (max-width: 850px) {
+  .header-inner { flex-wrap: nowrap; gap: 20px; }
+  .navigation { display: flex; flex-direction: row; position: static; order: 0; width: auto; margin-left: auto; padding: 0; border: 0; gap: 20px; font-size: 15px; }
+  .navigation a { min-height: 44px; display: inline-flex; align-items: center; padding-block: 12px; }
+  .header-join { margin-left: 0; }
+}
+@media (max-width: 600px) {
+  .header-inner { min-height: 76px; gap: 14px; }
+  .header .wordmark-name { display: none; }
+  .header .brand-logo { width: 42px; height: 42px; }
+  .navigation { gap: 16px; font-size: 15px; }
+  .navigation a:first-child { display: none; }
+  .header-join { padding-inline: 12px; min-height: 44px; }
+  .header-join > span { display: none; }
+}
+.story .events-link { display: flex; justify-content: space-between; align-items: center; gap: 20px; max-width: 420px; padding-block: 14px; font-family: var(--serif); font-size: clamp(26px, 2.5vw, 34px); font-weight: 600; line-height: 1.15; border-color: var(--red); }
+.events-link > span { color: var(--red); font-family: "DM Sans", sans-serif; font-size: 30px; flex-shrink: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .story .events-link { transition: color 200ms; }
+  .story .events-link:is(:hover, :focus-visible) { color: var(--red); opacity: 1; }
+  .events-link:is(:hover, :focus-visible) > span { translate: 4px -4px; }
+}
