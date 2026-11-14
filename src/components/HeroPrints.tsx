@@ -75,6 +75,7 @@ export function HeroPrints() {
     {galleryPhotos.slice(0, 2).map((photo, index) => <PhotoSpace key={photo.image} {...photo}
       onActivate={swap} actionLabel={`Shuffle prints: ${photo.caption}`} loading="eager"
       className={index === front ? "hero-photo-small" : "hero-photo-main"} />)}
+    <p className="shuffle-hint">Tap a print to shuffle</p>
     <span className="signature-label" role="status">{galleryPhotos[front].caption} is in front.</span>
   </div>;
 }

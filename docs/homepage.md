@@ -200,3 +200,15 @@ The header keeps one consistent Join link on every page; the large closing join
 section appears only on Home. No filler content was added. The previous preview
 and album navigation treatments above describe earlier iterations; event preview
 mode has been removed from the component.
+
+## Critique fixes: photo clarity and mobile pacing
+
+The viewer now announces original-photo loading and reports failed images with a
+Retry action. Zoom stays disabled until the image loads; Close and browsing remain
+available. The lazy viewer module has a visible opening status and Cancel action.
+Community filmstrip thumbnails use lightweight previews while the main image stays
+HD. The hero has a small shuffle hint, and the mobile album states the photo count
+and swipe/scroll action. Mobile hero spacing and collage height are tighter without
+changing the headline or print behavior. Footer text is 12px and Back to top has a
+44px target. Playwright tested a failed original and successful retry, slow loading,
+photo changes, reduced-motion shuffle, and containment at 320, 390, and 1440px.

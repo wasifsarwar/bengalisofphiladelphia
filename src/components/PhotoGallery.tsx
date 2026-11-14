@@ -1,3 +1,4 @@
+import { photoPreviews } from "../data/photoPreviews";
 import { galleryTransition } from "../utils/galleryTransition";
 import { useLayoutEffect, useRef, useState } from "react";
 import { galleryPhotos } from "../data/gallery";
@@ -9,11 +10,14 @@ export function PhotoGallery({ index, onChange, onClose, photos = galleryPhotos,
   const touch = useRef<{ x: number; y: number } | null>(null);
   const [direction, setDirection] = useState(1);
   const [zoom, setZoom] = useState(1);
+  const [attempt, setAttempt] = useState(0);
+  const [imageState, setImageState] = useState<{ image: string; status: "loading" | "ready" | "error" }>({ image: photos[index].image, status: "loading" });
   const viewport = useRef<HTMLDivElement>(null);
   const drag = useRef<{ x: number; y: number; left: number; top: number } | null>(null);
   const select = (next: number) => {
     setDirection(next >= index ? 1 : -1);
     setZoom(1);
+    setAttempt(0);
     viewport.current?.scrollTo({ left: 0, top: 0, behavior: "instant" });
     onChange(next);
   };
@@ -24,10 +28,12 @@ export function PhotoGallery({ index, onChange, onClose, photos = galleryPhotos,
     galleryTransition(onClose, opener.current, true);
   };
   const photo = photos[index];
+  const status = imageState.image === photo.image ? imageState.status : "loading";
   const move = (step: number) => {
     if (photos.length < 2) return;
     setDirection(step);
     setZoom(1);
+    setAttempt(0);
     viewport.current?.scrollTo({ left: 0, top: 0, behavior: "instant" });
     onChange((index + step + photos.length) % photos.length);
   };
@@ -51,13 +57,13 @@ export function PhotoGallery({ index, onChange, onClose, photos = galleryPhotos,
       <div className="gallery-panel">
         <div className="gallery-top"><span>{title}</span><button type="button" onClick={close} autoFocus>Close ×</button></div>
         <div className="gallery-tools" role="group" aria-label="Photo zoom">
-          <button type="button" disabled={zoom <= 1} aria-label="Zoom out" onClick={() => setZoom(Math.max(1, zoom - .5))}>−</button>
+          <button type="button" disabled={status !== "ready" || zoom <= 1} aria-label="Zoom out" onClick={() => setZoom(Math.max(1, zoom - .5))}>−</button>
           <span role="status">{Math.round(zoom * 100)}%</span>
-          <button type="button" disabled={zoom >= 3} aria-label="Zoom in" onClick={() => setZoom(Math.min(3, zoom + .5))}>+</button>
+          <button type="button" disabled={status !== "ready" || zoom >= 3} aria-label="Zoom in" onClick={() => setZoom(Math.min(3, zoom + .5))}>+</button>
           <button type="button" disabled={zoom === 1} onClick={() => { setZoom(1); viewport.current?.scrollTo({ left: 0, top: 0, behavior: "instant" }); }}>Fit photo</button>
         </div>
-        <p className="gallery-hint">{zoom > 1 ? "Drag or scroll to explore. Fit photo to browse again." : "Zoom in for details. Use the arrows to browse."}</p>
-        <div ref={viewport} tabIndex={0} role="region" aria-label="Photo viewing area" className="gallery-image" data-zoomed={zoom > 1}
+        <p className="gallery-hint">{status === "error" ? "Choose another photo or try again." : status === "loading" ? "Loading the original photo…" : zoom > 1 ? "Drag or scroll to explore. Fit photo to browse again." : "Zoom in for details. Use the arrows to browse."}</p>
+        <div ref={viewport} tabIndex={0} role="region" aria-label="Photo viewing area" className="gallery-image" aria-busy={status === "loading"} data-load-state={status} data-zoomed={zoom > 1}
           onPointerDown={event => {
             if (zoom === 1 || event.pointerType !== "mouse" || event.button !== 0) return;
             event.preventDefault();
@@ -81,11 +87,15 @@ export function PhotoGallery({ index, onChange, onClose, photos = galleryPhotos,
           const dy = event.changedTouches[0].clientY - start.y;
           if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) move(dx < 0 ? 1 : -1);
         }}>
-          <div className="gallery-canvas" style={{ width: `${zoom * 100}%`, height: `${zoom * 100}%` }}><img draggable={false} key={photo.image} src={imageUrl(`${folder}/${photo.image}`)} alt={photo.alt} onLoad={event => event.currentTarget.classList.add("gallery-image-ready")} /></div>
+          <div className="gallery-canvas" style={{ width: `${zoom * 100}%`, height: `${zoom * 100}%` }}><img draggable={false} key={`${photo.image}-${attempt}`} src={imageUrl(`${folder}/${photo.image}`) + (attempt ? `?retry=${attempt}` : "")} alt={photo.alt} onLoad={event => { event.currentTarget.classList.add("gallery-image-ready"); setImageState({ image: photo.image, status: "ready" }); }} onError={() => setImageState({ image: photo.image, status: "error" })} /></div>
+          {status !== "ready" && <div className="gallery-load-status" role="status">
+            <p>{status === "error" ? "This photo couldn’t load." : "Loading the original photo…"}</p>
+            {status === "error" && <button type="button" onClick={() => { setImageState({ image: photo.image, status: "loading" }); setAttempt(current => current + 1); }}>Retry photo</button>}
+          </div>}
         </div>
         {photos.length > 1 && <div className="gallery-filmstrip" role="group" aria-label="Choose a photo">
           {photos.map((item, number) => <button type="button" key={`${item.image}-${number}`} aria-label={`Show photo ${number + 1}: ${item.caption}`} aria-pressed={index === number} onClick={() => select(number)}>
-            <img src={imageUrl(`${folder}/${item.image}`)} alt="" loading="lazy" /><span>{String(number + 1).padStart(2, "0")}</span>
+            <img src={imageUrl(folder === "community" ? photoPreviews[item.image]?.[0]?.src ?? `community/${item.image}` : `events/${item.image}`)} alt="" loading="lazy" /><span>{String(number + 1).padStart(2, "0")}</span>
           </button>)}
         </div>}
         <div className="gallery-bottom">

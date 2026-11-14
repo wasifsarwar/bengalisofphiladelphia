@@ -72,7 +72,7 @@ export function Events() {
       {visible.length > 1 && <div className={`events-controls${visible.length <= 3 ? " events-controls-small" : ""}`}>
         <button type="button" disabled={!canScroll.left} onClick={() => scroll(-1)} aria-label="Scroll events left">←</button><span>Browse events</span><button type="button" disabled={!canScroll.right} onClick={() => scroll(1)} aria-label="Scroll events right">→</button>
       </div>}
-    </> : <div key={`empty-${past}-${month}`} className="events-empty"><Flower /><div className="events-empty-copy">{!past && <h3>No upcoming events yet.</h3>}<p>{past ? "No past events have been added for this month." : "New plans will be shared here when they’re confirmed."}</p><a className="text-link" href={links.heylo}>Visit BOP on Heylo <span aria-hidden="true">↗</span></a></div></div>}
+    </> : <div key={`empty-${past}-${month}`} className="events-empty"><Flower /><div className="events-empty-copy">{!past && <h2>No upcoming events yet.</h2>}<p>{past ? "No past events have been added for this month." : "New plans will be shared here when they’re confirmed."}</p><a className="text-link" href={links.heylo}>Visit BOP on Heylo <span aria-hidden="true">↗</span></a></div></div>}
     {flyerIndex !== null && flyers[flyerIndex] && <PhotoGallery photos={flyers} folder="events" title="Event flyers" index={flyerIndex} onChange={setFlyerIndex} onClose={() => setFlyerIndex(null)} />}
   </section>;
 }
