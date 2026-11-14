@@ -95,7 +95,7 @@ export function App() {
             <h2 id="story-heading">There’s always<br />room for<br /><em>one more.</em></h2>
             <p>We’re building a Bengali community in Philadelphia, rooted in Bangladesh and open to honorary Bengalis, too.</p>
             <p>Think cha and adda, a walk around the city, or a good reason to get together. Whether you’re new to Philly or have called it home for years, you’re welcome here.</p>
-            <a className="text-link events-link" href={`${base}events/`}>Explore upcoming and past events <span aria-hidden="true">↗</span></a>
+            <a className="text-link events-link" href={`${base}events/`}>Upcoming and Past events <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 
