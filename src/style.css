@@ -963,3 +963,22 @@ em { font-weight: 500; }
 @media (max-width: 600px) { .hero-collage { height: 400px; } }
 
 @media (max-width: 600px) { .shuffle-hint { bottom: -30px; } .hero { padding-bottom: 48px; } }
+
+/* A quieter phone introduction: one primary action and a smaller keepsake stack. */
+@media (max-width: 600px) {
+  .header-inner { min-height: 68px; gap: 12px; }
+  .header .brand-logo { width: 36px; height: 36px; }
+  .header-join { background: transparent; border-color: transparent; color: var(--red); padding-inline: 6px; font-size: 12px; }
+  .header-join:hover { background: transparent; color: var(--wine); }
+  .hero { padding-top: 32px; padding-bottom: 48px; }
+  .hero h1 { font-size: clamp(56px, 16vw, 76px); line-height: .95; }
+  .hero .location-note { margin-bottom: 24px; }
+  .hero-actions { margin-top: 28px; gap: 12px 20px; }
+  .hero-actions .button { font-size: 13px; padding: 14px 18px; }
+  .hero-actions .quiet-link { font-size: 12px; }
+  .hero-copy .join-context { display: none; }
+  .hero-copy .welcome-note { margin-top: 16px; font-size: 12px; }
+  .hero-collage { width: min(100%, 300px); height: 360px; margin-top: 40px; }
+  .hero-print-stack .photo-space figcaption { min-height: 64px; padding-block: 12px; }
+  .shuffle-hint { bottom: -28px; }
+}

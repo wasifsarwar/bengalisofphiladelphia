@@ -212,3 +212,13 @@ and swipe/scroll action. Mobile hero spacing and collage height are tighter with
 changing the headline or print behavior. Footer text is 12px and Back to top has a
 44px target. Playwright tested a failed original and successful retry, slow loading,
 photo changes, reduced-motion shuffle, and containment at 320, 390, and 1440px.
+
+## Quieter phone hero
+
+At phone widths, the header uses a plain-text Join link so the hero remains the
+single prominent Join button. Events and Photos stay visible in the same sticky
+row. The headline and photo stack are slightly smaller, with more separation
+between copy and photographs. The redundant Heylo explanation is hidden on phones;
+the named Heylo button and welcome note remain. Desktop composition is unchanged.
+Playwright checked 320/390/600/1440px and both shuffle positions for containment,
+caption visibility, and overflow.
