@@ -9,7 +9,7 @@ export function PhotoSpace({ className = "", caption, tone = "sand", image, alt,
   return (
     <figure className={`photo-space photo-${tone} ${className}`}>
       <div className="photo-surface" role={image ? undefined : "img"} aria-label={image ? undefined : `Photo placeholder: ${caption}`}>
-        {image ? <><img src={imageUrl(previews?.at(-1)?.src ?? `community/${image}`)} srcSet={previews?.map(preview => `${imageUrl(preview.src)} ${preview.width}w`).join(", ")} sizes="(max-width: 600px) 75vw, (max-width: 850px) 50vw, 640px" alt={alt ?? caption} loading={loading} decoding="async" />{(onOpen || onActivate) && <button className="photo-open" type="button" onClick={event => onActivate ? onActivate() : onOpen && galleryTransition(onOpen, event.currentTarget)} aria-label={actionLabel ?? `View photo: ${caption}`} />}</> : <>
+        {image ? <><img draggable={false} src={imageUrl(previews?.at(-1)?.src ?? `community/${image}`)} srcSet={previews?.map(preview => `${imageUrl(preview.src)} ${preview.width}w`).join(", ")} sizes="(max-width: 600px) 75vw, (max-width: 850px) 50vw, 640px" alt={alt ?? caption} loading={loading} decoding="async" />{(onOpen || onActivate) && <button className="photo-open" type="button" onClick={event => onActivate ? onActivate() : onOpen && galleryTransition(onOpen, event.currentTarget)} aria-label={actionLabel ?? `View photo: ${caption}`} />}</> : <>
         <span className="photo-corner corner-tl" aria-hidden="true" />
         <span className="photo-corner corner-tr" aria-hidden="true" />
         <span className="photo-corner corner-bl" aria-hidden="true" />

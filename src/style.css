@@ -982,3 +982,18 @@ em { font-weight: 500; }
   .hero-print-stack .photo-space figcaption { min-height: 64px; padding-block: 12px; }
   .shuffle-hint { bottom: -28px; }
 }
+
+/* Browse prints with a swipe; opening a photo is always a separate tap. */
+.hero-print-stack { touch-action: pan-y pinch-zoom; }
+.hero-print-stack .photo-open { cursor: zoom-in; }
+.hero-print-stack img { user-select: none; }
+/* The photo stack is the control; no visible instructions or navigation row. */
+.hero { padding-bottom: 52px; overflow-x: clip; }
+@media (max-width: 600px) { .hero { padding-bottom: 40px; } }
+
+/* Desktop prints are draggable across their image, paper, and caption. */
+@media (hover: hover) and (pointer: fine) {
+  .hero-print-stack .photo-space, .hero-print-stack .photo-open { cursor: grab; user-select: none; -webkit-user-select: none; }
+  .hero-print-stack[data-dragging="true"] .photo-space,
+  .hero-print-stack[data-dragging="true"] .photo-open { cursor: grabbing; }
+}

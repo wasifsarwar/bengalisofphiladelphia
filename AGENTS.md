@@ -119,8 +119,9 @@ implement fixes when the user asks for them. Do not run all commands as a checkl
 - Polaroid captions use Cormorant Garamond italic at a consistent readable scale.
   Do not reintroduce caption tracing, dotted photo frames, “Trace again,”
   “Arrange the prints,” or the removed gathering preference picker.
-- Hero prints are similarly sized, shuffle on activation, and stay inside the
-  hero. Other community photos open the viewer. Do not confuse these actions.
+- Hero prints are similarly sized and stay inside the hero. Swipe or keyboard arrows browse them; tapping opens the selected HD photo. Keep vertical
+  page scrolling and suppress accidental viewer opens after a drag. Do not restore
+  tap-to-shuffle. Other community photos also open the viewer.
 - Add delight through meaningful feedback, not extra switches, promotional copy,
   perpetual loops, or delays. Preserve reduced-motion alternatives and native
   button/keyboard behavior. Show focus for keyboard use, not a persistent outline

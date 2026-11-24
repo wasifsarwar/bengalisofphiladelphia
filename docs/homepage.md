@@ -149,16 +149,20 @@ SVG outlines. The generated paths live in `src/data/signatures.ts`.
 The closing invitation omits the former connection tagline; the floral motif and
 nakshi kantha thread details remain.
 
-## Hero print shuffle
+## Hero photo browsing
 
-Clicking or tapping either hero print swaps the two keepsakes, with the front
-print sliding outward before settling behind its companion. The hero uses native
-buttons with descriptive shuffle labels and keyboard support. Other community
-photos still open the photo viewer. `HeroPrints.tsx` owns the brief Web Animations
-sequence; rapid taps during the sequence are ignored, and reduced motion swaps
-instantly. Playwright checked both directions at 1440, 390, and 320px, keyboard
-activation, no horizontal overflow during the shuffle, and no reduced-motion
-animations.
+The two hero prints retain their paper-stack transition, but no longer shuffle on
+a tap. Horizontal swipes, mouse drags, or keyboard arrows browse
+them in place. Tapping/clicking a photo opens that exact original in the existing
+HD viewer. The print follows the horizontal gesture and settles on release. No visible hint
+or arrow controls appear below it; keyboard guidance is available to assistive technology. Vertical touch gestures scroll
+the page; pinch zoom remains native. A drag does not accidentally activate the
+photo button. Reduced motion changes the selected print instantly.
+
+Playwright tested actual touch gestures in both directions, tap-to-open, vertical
+scrolling, desktop keyboard controls, 320/1440px containment, and reduced motion.
+`src/utils/photoSwipe.ts` has unit coverage for direction, tap thresholds, and
+vertical/diagonal rejection.
 
 ## Album motion
 
@@ -222,3 +226,10 @@ between copy and photographs. The redundant Heylo explanation is hidden on phone
 the named Heylo button and welcome note remain. Desktop composition is unchanged.
 Playwright checked 320/390/600/1440px and both shuffle positions for containment,
 caption visibility, and overflow.
+
+Desktop mouse browsing tracks movement and release on the window rather than
+relying on photo pointer capture. It accepts horizontal drags from 24px while
+touch keeps its 48px threshold. Window blur cancels and resets the print. Native
+image/text dragging is suppressed. Playwright verified both directions, image and
+caption starts, releases beyond the image, short drags, click-to-open, blur
+cancellation, and unchanged touch swiping.

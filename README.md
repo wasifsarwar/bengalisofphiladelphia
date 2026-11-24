@@ -38,7 +38,7 @@ that support page view transitions animate navigation; other browsers load norma
 ## Current features
 
 - Real Home, Events, and Photos URLs, a mobile menu, and links to Heylo, Instagram, email, and the host form.
-- Two matching hero Polaroids that shuffle when clicked or tapped.
+- Two matching hero Polaroids: swipe or use keyboard arrows to browse, tap to open the HD photo.
 - Community photos and event flyers open in a viewer with arrows, thumbnails, zoom, and keyboard controls.
 - Upcoming and past events, a month selector, and horizontal scrolling when needed.
 - Responsive photo previews, original HD images in the viewer, and a viewer that loads on demand.

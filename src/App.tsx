@@ -81,7 +81,7 @@ export function App() {
             <p className="join-context">Find community plans and gathering details on Heylo.</p>
             <p className="welcome-note"><Flower />Bengalis & honorary Bengalis welcome.</p>
           </div>
-          <HeroPrints />
+          <HeroPrints onOpen={setPhotoIndex} />
         </section>
 
         <div className="community-ribbon" aria-label="Cha and adda, familiar roots, new friendships, Philly plans">
